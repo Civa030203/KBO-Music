@@ -60,7 +60,8 @@ module.exports = {
     "to-[#dc0232]",
     "from-[#ff6600]",
     "from-[#820024]",
-    "to-[#818286]"
+    "to-[#818286]",
+    "hover:scale-103"
   ],
   theme: {
     extend: {},

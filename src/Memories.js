@@ -38,13 +38,13 @@ function SelectTrigger({ children }) {
 }
 
 function SelectContent({ children }) {
-  return <div className="mt-2 space-y-1">{children}</div>;
+  return <div className="mt-2 space-y-4">{children}</div>;
 }
 
 function SelectItem({ children, value, onSelect, cheerSongs, team }) {
   return (
     <div
-      className={`px-40 py-2 hover:bg-red-100 rounded-xl cursor-pointer bg-gradient-to-bl from-[${cheerSongs[team].teamColor1}] to-[${cheerSongs[team].teamColor2}]`}
+      className={`px-40 py-2 hover:scale-105 active:scale-100 rounded-xl cursor-pointer bg-gradient-to-bl from-[${cheerSongs[team].teamColor1}] to-[${cheerSongs[team].teamColor2}]`}
       onClick={() => onSelect?.(value)}
     >
       {children}

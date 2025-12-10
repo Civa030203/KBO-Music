@@ -38,13 +38,13 @@ function SelectTrigger({ children }) {
 }
 
 function SelectContent({ children }) {
-  return <div className="mt-2 space-y-1">{children}</div>;
+  return <div className="mt-2 space-y-4">{children}</div>;
 }
 
 function SelectItem({ children, value, onSelect, cheerSongs, team }) {
   return (
     <div
-      className={`px-40 py-2 hover:bg-red-100 rounded-xl cursor-pointer bg-gradient-to-bl from-[${cheerSongs[team].teamColor1}] to-[${cheerSongs[team].teamColor2}]`}
+      className={`px-40 py-2 hover:scale-105 active:scale-100 rounded-xl cursor-pointer bg-gradient-to-bl from-[${cheerSongs[team].teamColor1}] to-[${cheerSongs[team].teamColor2}]`}
       onClick={() => onSelect?.(value)}
     >
       {children}
@@ -131,9 +131,13 @@ const App = () => {
                       <div className="flex items-center gap-3">
                         {/* 프로필 이미지 틀 */}
                           <div className="w-10 h-10 rounded-full overflow-hidden">
-                            {song.isLegend ?
+                            {song.retired ?
                               (<img
-                                src={`http://6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/${song.retired}/${song.playerID}.jpg`} // 사용자가 제공한 이미지 경로 입력
+                                src={
+                                  song.link ?
+                                    song.link :
+                                    `http://6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/${song.retired}/${song.playerID}.jpg`
+                                    } // 사용자가 제공한 이미지 경로 입력
                                 alt={`${song.title} 프로필`}
                                 className="w-full h-full object-cover"
                               />) :
@@ -144,7 +148,7 @@ const App = () => {
                             />)
                             }
                         </div>
-                        <div className="text-xs font-bold">{song.title}</div>
+                        <div className={`text-xs font-bold ${song.isLegend ? "text-orange-200" : ''}`}>{song.title}</div>
                       </div>
                       <Button onClick={
                         function () {
@@ -181,7 +185,10 @@ const App = () => {
                   <span>{currentSong.title}</span>
                   <div className="w-2xl h-2xl rounded-full overflow-hidden mb-4">
                     <img
-                      src={`http://6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/${currentSong.isLegend ? currentSong.retired : "2025"}/${currentSong.playerID}.jpg`}
+                      src={currentSong.link ?
+                           currentSong.link :
+                           `http://6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/${currentSong.retired ? currentSong.retired : "2025"}/${currentSong.playerID}.jpg`
+                          }
                       alt={`${currentSong.title} 프로필`}
                       className="w-full h-full object-cover"
                     />
