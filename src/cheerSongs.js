@@ -269,7 +269,13 @@ export const cheerSongs = {
       { title: "No.55 강현우", playerID: "50066", lyrics: "KT 위즈 승리 위해 강현우 오오오오오 KT 위즈 안방마님 강현우 오오오오오\nKT 위즈 승리 위해 강현우 오오오오오 KT 위즈 안방마님 강현우 오오오오오 강! 현! 우!" },
       { title: "No.52 권동진", playerID: "51003", lyrics: "KT 권동진 안타 KT 권동진 안타 안타를 날려라 KT 위즈 권동진 안타\nKT 권동진 안타 KT 권동진 안타 날려버려 권동진 You can do it! GO!" },
       { title: "No.53 김민혁", playerID: "64004", lyrics: "KT 위즈 김민혁 날려버려 김민혁 We can come together We can come together\nKT 위즈 김민혁 날려버려 김민혁 We can come together We can come together\n(안타!) (안타!) (안타! 김민혁!)" },
-      { title: "No.7 김상수", playerID: "79402", lyrics: "날려버려 안타 김상수 날려버려 안타 김상수 날려버려 안타 김상수 상수\n김상수 김상수 KT 위즈 김상수 KT 위즈 승리 위해 오오오오\n김상수 김상수 KT 위즈 김상수 KT 위즈 김상수 김상수!" },
+      {
+        title: "No.7 김상수", playerID: "79402",
+        cheers: [
+          { title: "등장곡 2", fileName: "79402_i2", lyrics: "" },
+          { title: "응원가 1", fileName: "79402_1", lyrics: "날려버려 김상수 야야야야야 안타 안타 김상수 야야야야야 날려버려 김상수 야야야야야 안타 안타 김상수 야야야야야\nHey! Hey! Hey! Hey!" },
+          { title: "응원가 2", fileName: "79402_2", lyrics: "날려버려 안타 김상수 날려버려 안타 김상수 날려버려 안타 김상수 상수\n김상수 김상수 KT 위즈 김상수 KT 위즈 승리 위해 오오오오\n김상수 김상수 KT 위즈 김상수 KT 위즈 김상수 김상수!" }
+        ]
       { title: "No.10 김현수", playerID: "76290", lyrics: "KT 김현수 야이야이야이야이 김현수 승리를 위하여 안타를 날려버려라\nKT 김현수 야이야이야이야이 김현수 KT 승리 위해 날려버려 김현수 (김! 현! 수!)" },
       { title: "No.9 류현인", playerID: "53036", lyrics: "안타 홈런 날려버려 KT 류현인 워어어 안타 홈런 날려버려 KT 류현인 워어어\n아이아이아아 아이아이아아 아이아이아아 류! 현! 인! 아이아이아아 아이아이아아 아이아이아아 류! 현! 인!" },
       { title: "No.24 문상철", playerID: "64007", lyrics: "KT 문상철 워우워우워우워 KT 문상철 워우워우워우워 KT 문상철 워우워우워우워 신나게 외쳐봅시다\nKT 문상철 워우워우워우워 KT 문상철 워우워우워우워 KT 문상철 워우워우워우워 신나게 외쳐봅시다 문! 상! 철!" },
