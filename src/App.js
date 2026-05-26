@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cheerSongs } from "./cheerSongs";
 import { Link } from "react-router-dom";
@@ -17,7 +17,7 @@ function Button({ children, onClick, color }) {
   return (
     <button
       onClick={onClick}
-      className={`bg-[${color}] hover:bg-red-600 text-white text-sm font-semibold py-1 px-8 rounded-xl`}
+      className={`bg-[${color}] hover:bg-red-600 text-white text-sm font-semibold py-1.5 px-4 rounded-xl whitespace-nowrap`}
     >
       {children}
     </button>
@@ -59,6 +59,76 @@ const App = () => {
   const [selectedSongTeam, setSelectedSongTeam] = useState(null);
   const [currentSongType, setCurrentSongType] = useState("cheer");
 
+  // 전체 재생 기능 상태
+  const [playlist, setPlaylist] = useState([]);
+  const [currentPlaylistIndex, setCurrentPlaylistIndex] = useState(-1);
+
+  useEffect(() => {
+    // 팀이 변경되면 진행 중이던 전체 재생 목록을 초기화합니다.
+    setCurrentPlaylistIndex(-1);
+    setPlaylist([]);
+  }, [selectedTeam]);
+
+  useEffect(() => {
+    if (currentPlaylistIndex >= 0 && playlist.length > 0 && currentPlaylistIndex < playlist.length) {
+      const currentItem = playlist[currentPlaylistIndex];
+      setCurrentSong(currentItem.song);
+      setCurrentSongType(currentItem.type);
+      setSelectedSongTeam(cheerSongs[selectedTeam]);
+      setSelectedSongTeamID(cheerSongs[selectedTeam].teamID);
+    } else if (currentPlaylistIndex >= playlist.length) {
+      setCurrentPlaylistIndex(-1);
+      setPlaylist([]);
+    }
+  }, [currentPlaylistIndex, playlist, selectedTeam]);
+
+  const handlePlayAll = () => {
+    if (!selectedTeam) return;
+    const teamSongs = cheerSongs[selectedTeam].songs;
+    const nextPlaylist = [];
+
+    teamSongs.forEach(song => {
+      // 1. 등장곡
+      nextPlaylist.push({ song, type: "intro" });
+
+      // 2. 응원가 (여러 개일 수 있음)
+      if (song.cheers) {
+        song.cheers.forEach(cheer => {
+          nextPlaylist.push({
+            song: { ...song, fileName: cheer.fileName, lyrics: cheer.lyrics },
+            type: "cheer"
+          });
+        });
+      } else {
+        nextPlaylist.push({ song, type: "cheer" });
+      }
+    });
+
+    setPlaylist(nextPlaylist);
+    setCurrentPlaylistIndex(0);
+  };
+
+  const handleAudioEnded = () => {
+    if (playlist.length > 0 && currentPlaylistIndex !== -1) {
+      setCurrentPlaylistIndex(prev => prev + 1);
+    }
+  };
+
+  const handleManualPlay = (song, type, isCheer = false, cheerObj = null) => {
+    setCurrentPlaylistIndex(-1);
+    setPlaylist([]);
+    
+    if (isCheer && cheerObj) {
+      setCurrentSong({ ...song, fileName: cheerObj.fileName, lyrics: cheerObj.lyrics });
+    } else {
+      setCurrentSong(song);
+    }
+    
+    setSelectedSongTeam(cheerSongs[selectedTeam]);
+    setSelectedSongTeamID(cheerSongs[selectedTeam].teamID);
+    setCurrentSongType(type);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-100 to-white p-4 md:p-10">
       {/* 상단 타이틀바 */}
@@ -71,8 +141,8 @@ const App = () => {
         {/* 왼쪽: 팀 선택 + 곡 리스트 */}
         <div>
           {currentSong ?
-            (<div className="h-[350px] md:h-0"/>) :
-            (<div/>)
+            (<div className="h-[350px] md:h-0" />) :
+            (<div />)
           }
           <div className="max-w-md mx-auto mb-6">
             <Link to="/memories">Memories</Link>
@@ -88,14 +158,14 @@ const App = () => {
                     cheerSongs={cheerSongs}
                     team={team}
                   >
-                  <div>
-                    <img
-                      src={cheerSongs[team].logo}
-                      alt={`${team} 로고`}
-                      className={"mb-2"}
-                      style={{ width: "160px", height: "160px" }}
-                    />
-                  </div>
+                    <div>
+                      <img
+                        src={cheerSongs[team].logo}
+                        alt={`${team} 로고`}
+                        className={"mb-2"}
+                        style={{ width: "160px", height: "160px" }}
+                      />
+                    </div>
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -113,6 +183,9 @@ const App = () => {
                 />
               </div>
               <h2 className="text-2xl font-bold">{selectedTeam}</h2>
+              <div className="mt-4">
+                <Button onClick={handlePlayAll} color={cheerSongs[selectedTeam].teamColor2}>전체 재생</Button>
+              </div>
             </div>
           )}
 
@@ -127,47 +200,45 @@ const App = () => {
                 >
                   <Card
                     color={cheerSongs[selectedTeam].teamColor1}>
-                    <CardContent className="flex items-center justify-between">
+                    <CardContent className="flex flex-col gap-2">
+                      {/* 위 행: 프로필 이미지 + 선수 이름 */}
                       <div className="flex items-center gap-3">
                         {/* 프로필 이미지 틀 */}
-                          <div className="w-10 h-10 rounded-full overflow-hidden">
-                            {song.retired ?
-                              (<img
-                                src={
-                                  song.link ?
-                                    song.link :
-                                    `http://6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/${song.retired}/${song.playerID}.jpg`
-                                    } // 사용자가 제공한 이미지 경로 입력
-                                alt={`${song.title} 프로필`}
-                                className="w-full h-full object-cover"
-                              />) :
-                              (<img
-                                src={`http://6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/2025/${song.playerID}.jpg`} // 사용자가 제공한 이미지 경로 입력
-                                alt={`${song.title} 프로필`}
-                                className="w-full h-full object-cover"
+                        <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+                          {song.retired ?
+                            (<img
+                              src={
+                                song.link ?
+                                  song.link :
+                                  `http://6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/${song.retired}/${song.playerID}.jpg`
+                              }
+                              alt={`${song.title} 프로필`}
+                              className="w-full h-full object-cover"
+                            />) :
+                            (<img
+                              src={
+                                song.link ?
+                                  song.link :
+                                  `http://6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/2026/${song.playerID}.jpg`
+                              }
+                              alt={`${song.title} 프로필`}
+                              className="w-full h-full object-cover"
                             />)
-                            }
+                          }
                         </div>
-                        <div className={`text-xs font-bold ${song.isLegend ? "text-orange-200" : ''}`}>{song.title}</div>
+                        <div className={`text-sm font-bold ${song.isLegend ? "text-orange-200" : ''}`}>{song.title}</div>
                       </div>
-                      <Button onClick={
-                        function () {
-                          setCurrentSong(song);
-                          setSelectedSongTeam(cheerSongs[selectedTeam]);
-                          setSelectedSongTeamID(cheerSongs[selectedTeam].teamID);
-                          setCurrentSongType("intro");
-                        }
-                      }
-                      color={cheerSongs[selectedTeam].teamColor2}>등장곡</Button>
-                      <Button onClick={
-                        function () {
-                          setCurrentSong(song);
-                          setSelectedSongTeam(cheerSongs[selectedTeam]);
-                          setSelectedSongTeamID(cheerSongs[selectedTeam].teamID);
-                          setCurrentSongType("cheer");
-                        }
-                      }
-                      color={cheerSongs[selectedTeam].teamColor2}>응원가</Button>
+                      {/* 아래 행: 버튼들 */}
+                      <div className="flex gap-2 flex-wrap">
+                        <Button onClick={() => handleManualPlay(song, "intro")} color={cheerSongs[selectedTeam].teamColor2}>등장곡</Button>
+                        {song.cheers ? (
+                          song.cheers.map((cheer, idx) => (
+                            <Button key={idx} onClick={() => handleManualPlay(song, "cheer", true, cheer)} color={cheerSongs[selectedTeam].teamColor2}>{cheer.title || `응원가${idx + 1}`}</Button>
+                          ))
+                        ) : (
+                          <Button onClick={() => handleManualPlay(song, "cheer")} color={cheerSongs[selectedTeam].teamColor2}>응원가</Button>
+                        )}
+                      </div>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -181,35 +252,39 @@ const App = () => {
             {currentSong ?
               (
                 <div className={`bg-gradient-to-bl from-[${selectedSongTeam.teamColor1}] to-[${selectedSongTeam.teamColor2}] shadow-lg rounded-xl p-6 w-full max-w-md text-white`}>
-                <div className="mb-4 font-medium flex items-center gap-4">
-                  <span>{currentSong.title}</span>
-                  <div className="w-2xl h-2xl rounded-full overflow-hidden mb-4">
-                    <img
-                      src={currentSong.link ?
-                           currentSong.link :
-                           `http://6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/${currentSong.retired ? currentSong.retired : "2025"}/${currentSong.playerID}.jpg`
-                          }
-                      alt={`${currentSong.title} 프로필`}
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="mb-4 font-medium flex items-center gap-4">
+                    <span>{currentSong.title}</span>
+                    <div className="w-2xl h-2xl rounded-full overflow-hidden mb-4">
+                      <img
+                        src={currentSong.link ?
+                          currentSong.link :
+                          `http://6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/${currentSong.retired ? currentSong.retired : "2026"}/${currentSong.playerID}.jpg`
+                        }
+                        alt={`${currentSong.title} 프로필`}
+                        className="w-24 h-32 object-cover"
+                      />
+                    </div>
                   </div>
-                </div>
                   {currentSongType === "cheer" ?
                     (
                       <div>
-                        <audio controls autoPlay src={`https://civa030203.github.io/KBO-Music/music/player/${selectedSongTeamID}/${currentSong.playerID}.mp3`} className="w-full"></audio>
+                        {selectedSongTeamID === "WBC" ? <audio controls autoPlay src={`https://civa030203.github.io/KBO-Music/music/player/${currentSong.playerTeam}/${currentSong.fileName || currentSong.playerID}.mp3`} className="w-full" onEnded={handleAudioEnded} onError={handleAudioEnded}></audio>
+                          : <audio controls autoPlay src={`https://civa030203.github.io/KBO-Music/music/player/${selectedSongTeamID}/${currentSong.fileName || currentSong.playerID}.mp3`} className="w-full" onEnded={handleAudioEnded} onError={handleAudioEnded}></audio>}
                         <h1 className="grid place-items-center font-bold">가사</h1>
                         <h2 className="italic whitespace-pre-wrap">{`${currentSong.lyrics}`}</h2>
                       </div>
                     ) :
                     (
-                      <audio controls autoPlay src={`https://civa030203.github.io/KBO-Music/music/intro/${selectedSongTeamID}/${currentSong.playerID}.mp3`} className="w-full" />
+                      <div>
+                        {selectedSongTeamID === "WBC" ? <audio controls autoPlay src={`https://civa030203.github.io/KBO-Music/music/intro/${currentSong.playerTeam}/${currentSong.fileName || currentSong.playerID}.mp3`} className="w-full" onEnded={handleAudioEnded} onError={handleAudioEnded}></audio>
+                          : <audio controls autoPlay src={`https://civa030203.github.io/KBO-Music/music/intro/${selectedSongTeamID}/${currentSong.fileName || currentSong.playerID}.mp3`} className="w-full" onEnded={handleAudioEnded} onError={handleAudioEnded}></audio>}
+                      </div>
                     )
                   }
                 </div>
               ) : (
-                <div/>
-              // <div className="text-gray-400 italic mt-10">선택된 곡이 없습니다.</div>
+                <div />
+                // <div className="text-gray-400 italic mt-10">선택된 곡이 없습니다.</div>
               )}
           </div>
         </div>

@@ -31,6 +31,8 @@ module.exports = {
     "bg-[#b07f4a]",
     "bg-[#820024]",
     "bg-[#818286]",
+    "bg-[#000225]",
+    "bg-[#00022e]",
     "from-[#ea0029]",
     "to-[#06141f]",
     "from-[#074ca1]",
@@ -61,6 +63,8 @@ module.exports = {
     "from-[#ff6600]",
     "from-[#820024]",
     "to-[#818286]",
+    "from-[#000225]",
+    "to-[#00022e]",
     "hover:scale-103"
   ],
   theme: {
