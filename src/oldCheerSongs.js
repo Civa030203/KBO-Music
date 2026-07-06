@@ -388,7 +388,7 @@ export const cheerSongs = {
       { title: "No.52 노진혁", playerID: "62931", lyrics: "안타 날려줘요 노진혁 홈런 날려줘요 노진혁 NC의 승리를 위하여 오오 노진혁\n안타 날려줘요 노진혁 홈런 날려줘요 노진혁 NC의 승리를 위하여 오오 노진혁 (노! 진! 혁!)", memory: 2022, misc: "2022년 11월 23일 FA로 롯데 이적" },
       { title: "No.4 닉 마티니", playerID: "52904", lyrics: "닉 마티니 워우워어 닉 마티니 워우워어 닉 마티니 워우워어 워어어어어\n닉 마티니 워우워어 닉 마티니 워우워어 닉 마티니 워우워어 워어어어어", memory: 2022, misc: "2022 시즌 종료 후 방출" },
       { title: "No.5 마낙길", playerID: "62967", lyrics: "I like the 낙길 낙길 I like the 낙길 낙길 I like the 낙길 낙길 I like the 마낙길\nI like the 낙길 낙길 I like the 낙길 낙길 I like the 낙길 낙길 I like the 마낙길", memory: 2016, misc: "2015 시즌 종료 후 방출" },
-      { title: "No.24 맷 데이비슨", playerID: "54944", lyrics: "데이비슨 오오 데이비슨 오오오오 데이비슨 오오 NC 다이노스 데! 이! 비! 슨!\n데이비슨 오오 데이비슨 오오오오 데이비슨 오오 NC 다이노스 데! 이! 비! 슨!", memory: 2026, misc: "2026년 6월 27일 방출 후 키움 이적" },
+      { title: "No.24 맷 데이비슨", playerID: "54944", link: "https://civa030203.github.io/KBO-Music/profiles/54944_nc_cropped.png", lyrics: "데이비슨 오오 데이비슨 오오오오 데이비슨 오오 NC 다이노스 데! 이! 비! 슨!\n데이비슨 오오 데이비슨 오오오오 데이비슨 오오 NC 다이노스 데! 이! 비! 슨!", memory: 2026, misc: "2026년 6월 27일 방출 후 키움 이적" },
       { title: "No.16 모창민", playerID: "78813", lyrics: "아 NC의 모창민 (모! 창! 민!) 힘차게 거침없이 홈런 (모! 창! 민!)\n아 NC의 모창민 (모! 창! 민!) 힘차게 거침없이 홈런 (모! 창! 민!)", memory: 2021, misc: "2021년 4월 26일 은퇴" },
       { title: "No.26 박대온", playerID: "64944", lyrics: "NC의 박대온 한 방 날려버려 박대온 다이노스 승리 위해 너는 할 수 있어 박대온\nNC의 박대온 한 방 날려버려 박대온 다이노스 승리를 위해 워어어어 (박! 대! 온!)", memory: 2023, misc: "2023년 11월 22일 2차 드래프트로 SSG 이적" },
       { title: "No.19 박상혁", playerID: "79657", lyrics: "혁혁혁혁혁 혁혁혁혁혁 살아있네 박상혁 살아있네 박상혁\n혁혁혁혁혁 혁혁혁혁혁 살아있네 박상혁 살아있네 박상혁", memory: 2017, misc: "2017 시즌 중 방출" },
