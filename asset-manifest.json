@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/KBO-Music/static/css/main.2ff13ea1.css",
-    "main.js": "/KBO-Music/static/js/main.0996863a.js",
+    "main.js": "/KBO-Music/static/js/main.f49f62de.js",
     "static/js/453.ed3810f9.chunk.js": "/KBO-Music/static/js/453.ed3810f9.chunk.js",
     "index.html": "/KBO-Music/index.html",
     "main.2ff13ea1.css.map": "/KBO-Music/static/css/main.2ff13ea1.css.map",
-    "main.0996863a.js.map": "/KBO-Music/static/js/main.0996863a.js.map",
+    "main.f49f62de.js.map": "/KBO-Music/static/js/main.f49f62de.js.map",
     "453.ed3810f9.chunk.js.map": "/KBO-Music/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2ff13ea1.css",
-    "static/js/main.0996863a.js"
+    "static/js/main.f49f62de.js"
   ]
 }
