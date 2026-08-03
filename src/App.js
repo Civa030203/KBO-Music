@@ -44,7 +44,7 @@ function SelectContent({ children }) {
 function SelectItem({ children, value, onSelect, cheerSongs, team }) {
   return (
     <div
-      className={`px-40 py-2 hover:scale-105 active:scale-100 rounded-xl cursor-pointer bg-gradient-to-bl from-[${cheerSongs[team].teamColor1}] to-[${cheerSongs[team].teamColor2}]`}
+      className={`py-4 flex items-center justify-center hover:scale-105 active:scale-100 rounded-xl cursor-pointer bg-gradient-to-bl from-[${cheerSongs[team].teamColor1}] to-[${cheerSongs[team].teamColor2}]`}
       onClick={() => onSelect?.(value)}
     >
       {children}
@@ -58,6 +58,7 @@ const App = () => {
   const [selectedSongTeamID, setSelectedSongTeamID] = useState(null);
   const [selectedSongTeam, setSelectedSongTeam] = useState(null);
   const [currentSongType, setCurrentSongType] = useState("cheer");
+  const [isTeamDropdownOpen, setIsTeamDropdownOpen] = useState(false);
 
   // 전체 재생 기능 상태
   const [playlist, setPlaylist] = useState([]);
@@ -144,17 +145,21 @@ const App = () => {
             (<div className="h-[350px] md:h-0" />) :
             (<div />)
           }
-          <div className="max-w-md mx-auto mb-6">
-            <Link to="/memories">Memories</Link>
-            <Select>
-              <SelectTrigger><h3>{"선택된 팀 : " + selectedTeam || "팀을 선택하세요"}</h3></SelectTrigger>
-              <h3> TEAM LIST </h3>
-              <SelectContent>
+          <div className="max-w-xl mx-auto mb-6">
+            <div className="flex gap-2">
+              <Link to="/memories" className="border border-gray-300 rounded-xl px-4 py-2 bg-white cursor-pointer font-semibold hover:bg-gray-100 transition-colors no-underline text-black whitespace-nowrap flex items-center text-sm">추억의 응원가</Link>
+              <div className="flex-1 border border-gray-300 rounded-xl px-4 py-2 bg-white cursor-pointer flex items-center justify-between" onClick={() => setIsTeamDropdownOpen(!isTeamDropdownOpen)}>
+                <h3>{selectedTeam ? "선택된 팀 : " + selectedTeam : "팀을 선택하세요"}</h3>
+                <span className="text-gray-500">{isTeamDropdownOpen ? "▲" : "▼"}</span>
+              </div>
+            </div>
+            {isTeamDropdownOpen && (
+              <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                 {Object.keys(cheerSongs).map((team) => (
                   <SelectItem
                     key={team}
                     value={team}
-                    onSelect={(val) => setSelectedTeam(val)}
+                    onSelect={(val) => { setSelectedTeam(val); setIsTeamDropdownOpen(false); }}
                     cheerSongs={cheerSongs}
                     team={team}
                   >
@@ -163,13 +168,13 @@ const App = () => {
                         src={cheerSongs[team].logo}
                         alt={`${team} 로고`}
                         className={"mb-2"}
-                        style={{ width: "160px", height: "160px" }}
+                        style={{ width: "120px", height: "120px" }}
                       />
                     </div>
                   </SelectItem>
                 ))}
-              </SelectContent>
-            </Select>
+              </div>
+            )}
           </div>
 
           {selectedTeam && (
@@ -251,8 +256,14 @@ const App = () => {
           <div className="fixed top-16 left-0 right-0 z-50 md:sticky md:top-24 flex flex-col items-center justify-start">
             {currentSong ?
               (
-                <div className={`bg-gradient-to-bl from-[${selectedSongTeam.teamColor1}] to-[${selectedSongTeam.teamColor2}] shadow-lg rounded-xl p-6 w-full max-w-md text-white`}>
-                  <div className="mb-4 font-medium flex items-center gap-4">
+                <div className={`bg-gradient-to-bl from-[${selectedSongTeam.teamColor1}] to-[${selectedSongTeam.teamColor2}] shadow-lg rounded-xl p-6 w-full max-w-md text-white relative overflow-hidden`}>
+                  {/* 배경 팀 로고 */}
+                  <img
+                    src={selectedSongTeam.logo}
+                    alt=""
+                    className="absolute -right-10 top-1/2 -translate-y-1/2 w-80 h-80 opacity-20 pointer-events-none select-none"
+                  />
+                  <div className="mb-4 font-medium flex items-center gap-4 relative">
                     <span>{currentSong.title}</span>
                     <div className="w-2xl h-2xl rounded-full overflow-hidden mb-4">
                       <img
