@@ -65,7 +65,7 @@ export const cheerSongs = {
       { title: "No.3 루이스 히메네스", playerID: "65103", memory: 2017, lyrics: "L! G! 히메네스 오오오 오오오 오오오 오오오오 L! G! 히메네스 오오오 오오오 오오오오오오\nL! G! 히메네스 오오오 오오오 오오오 오오오오 L! G! 히메네스 오오오 오오오 오오오오오오", misc: "2017년 7월 18일 방출" },
       { title: "No.6 류지현", playerID: "94106", memory: 2022, lyrics: "날려라 날려라 류지현 안타 류지현 (안타!)\n날려라 날려라 류지현 안타 류지현 (안타!)", misc: "2004 시즌 종료 후 은퇴" },
       { title: "No.12 리오 루이즈", playerID: "52112", memory: 2022, lyrics: "무적 LG 루이즈 오오오 Go! Go! 루이즈 승리를 위하여 날려버려 GO! GO! 루이즈!\n무적 LG 루이즈 오오오 Go! Go! 루이즈 승리를 위하여 날려버려 GO! GO! 루이즈!", misc: "2022년 5월 30일 방출" },
-      { title: "No.49 마해영", playerID: "95549", memory: 2017, lyrics: "홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우!\n홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우!", misc: "2007 시즌 종료 후 방출 후 롯데 이적" },
+      { title: "No.49 마해영", playerID: "95549", memory: 2017, lyrics: "홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우!\n홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우!", misc: "2007 시즌 종료 후 방출 후 롯데 이적", link: "https://civa030203.github.io/KBO-Music/profiles/95549_lg_cropped.png" },
       {
         title: "No.49 문선재", playerID: "79113", memory: 2018,
         cheers: [
