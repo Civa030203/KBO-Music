@@ -901,5 +901,21 @@ export const cheerSongs = {
       { title: "No.25 홍성갑", playerID: "61366", memory: 2018, lyrics: "힘차게 날려라 신나게 달려라 히어로즈의 Ho! 홍! 성! 갑!\n힘차게 날려라 신나게 달려라 히어로즈의 Ho! 홍! 성! 갑!", misc: "2018 시즌 종료 후 방출 후 한화 이적" },
       { title: "No.3 황재균", playerID: "76313", memory: 2016, lyrics: "히어로즈 황재균 워우워 (황! 재! 균!) 히어로즈 황재균 워우워 (황! 재! 균!)\n히어로즈 황재균 워우워 (황! 재! 균!) 히어로즈 황재균 워우워 영원하리라", misc: "2010년 7월 20일 트레이드로 롯데 이적", link: "https://cdn.todaykorea.co.kr/news/photo/201007/117180_96386_1312.jpg" },
     ]
+  },
+  "울산 웨일즈": {
+    teamID: "UL",
+    teamColor1: "#c70000",
+    teamColor2: "#060202",
+    logo: "https://civa030203.github.io/KBO-Music/profiles/UL.svg",
+    songs: [
+      {
+        title: "No.5 변상권", playerID: "68305", memory: 2026,
+        cheers: [
+          { title: "응원가 1", fileName: "68305_1", lyrics: "마라마라마라 상권 워어어어어어어어 마라 마라 마라상권 워어어어어어어어어 마라 마라 마라상권\n워어어어어어어어어 마라 마라상권 워어어어어어어어어 마라 마라 마라상권" },
+          { title: "응원가 2", fileName: "68305_2", lyrics: "오오오 히어로 히어로 변상권 안타 날려버려 날려버려라 오오오 히어로 히어로 변상권 키움 승리 위해 날려버려라\n오오오 히어로 히어로 변상권 안타 날려버려 날려버려라 오오오 히어로 히어로 변상권 키움 승리 위해 날려버려라" },
+        ],
+        misc: "2026년 7월 31일 은퇴"
+      }
+    ]
   }
 };
