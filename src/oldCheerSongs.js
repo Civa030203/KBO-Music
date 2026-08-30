@@ -700,7 +700,7 @@ export const cheerSongs = {
       { title: "No.30 유민상", playerID: "62265", memory: 2021, lyrics: "오 오 오 오 타이거즈 유민상 빰빠밤빰빰빰 시원하게 날려라 빰빠밤빰빰빰 타이거즈 유민상 빰빠밤빰빰빰 유쾌하게 날려라 빰빠밤빰빰빰 Hey!", misc: "2021 시즌 종료 후 방출" },
       { title: "No.24 윤석민", playerID: "75620", memory: 2019, lyrics: "KIA의 언터쳐블 윤석민 KIA의 윤석민 윤석민 KIA의 언터쳐블 윤석민 윤석민 사랑해요", misc: "2019년 12월 13일 은퇴" },
       { title: "No.9 윤해진", playerID: "62668", memory: 2019, lyrics: "윤완주 KIA의 윤완주 워어어어어어어 KIA의 승리 위해 윤완주 KIA의 윤완주 워어어어어어어 KIA의 승리 위해", misc: "2019 시즌 종료 후 은퇴" },
-      { title: "No.53 이대형", playerID: "73153", memory: 2016, lyrics: "슈퍼소닉 KIA 이대형 워어어어어 승리를 위해 슈퍼소닉 KIA 이대형 워어어어어 승리를 위해\n슈퍼소닉 KIA 이대형 워어어어어 승리를 위해 슈퍼소닉 KIA 이대형 워어어어어 승리를 위해", misc: "2014 시즌 종료 후 신생팀 특별지명으로 kt 이적", link: "https://web.archive.org/web/20150906114256im_/http://www.koreabaseball.com/FILE/person/middle/73153.jpg" },
+      { title: "No.53 이대형", playerID: "73153", memory: 2016, lyrics: "슈퍼소닉 KIA 이대형 워어어어어 승리를 위해 슈퍼소닉 KIA 이대형 워어어어어 승리를 위해\n슈퍼소닉 KIA 이대형 워어어어어 승리를 위해 슈퍼소닉 KIA 이대형 워어어어어 승리를 위해", misc: "2014 시즌 종료 후 신생팀 특별지명으로 kt 이적", link: "https://civa030203.github.io/KBO-Music/profiles/95158_lg_cropped.png" },
       { title: "No.61 이명기", playerID: "76849", memory: 2018, lyrics: "치고 달려라 KIA 이명기 워어어어어 KIA 이명기 치고 달려라 KIA 이명기 워어어어 승리를 위해\n치고 달려라 KIA 이명기 워어어어어 KIA 이명기 치고 달려라 KIA 이명기 워어어어 승리를 위해", misc: "2019년 7월 6일 트레이드로 NC 이적" },
       { title: "No.32 이성우", playerID: "71184", memory: 2016, lyrics: "워어어어어 이성우 워어어어어 이성우 타이거즈 오오 이성우 오오오오오\n워어어어어 이성우 워어어어어 이성우 타이거즈 오오 이성우 오오오오오", misc: "2017년 4월 7일 트레이드로 SK 이적" },
       { title: "No.15 이용규", playerID: "74163", memory: 2016, lyrics: "타이거즈 날쌘돌이 KIA의 이용규 타이거즈 날쌘돌이 KIA의 이용규\n타이거즈 날쌘돌이 KIA의 이용규 타이거즈 날쌘돌이 KIA의 이용규", misc: "2013년 11월 16일 FA로 한화 이적" },
