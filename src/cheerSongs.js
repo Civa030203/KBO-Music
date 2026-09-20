@@ -46,7 +46,7 @@ export const cheerSongs = {
       { title: "No.60 박영현", playerTeam: "KT", playerID: "52060", lyrics: "" },
       { title: "No.65 성영탁", playerTeam: "HT", playerID: "54610", lyrics: "" },
       { title: "No.68 최민석", playerTeam: "OB", playerID: "55268", lyrics: "" },
-      { title: "No.91 윤동희", playerTeam: "LT", playerID: "52551", lyrics: "롯데의 윤동희 쎄리라 안타 쎄리라 최강 롯데 자이언츠 윤동희 (안타!)\n롯데의 윤동희 쎄리라 안타 세리라 최강 롯데 자이언츠 윤동희 (안타!)" },
+      { title: "No.91 윤동희", playerTeam: "LT", playerID: "52591", lyrics: "롯데의 윤동희 쎄리라 안타 쎄리라 최강 롯데 자이언츠 윤동희 (안타!)\n롯데의 윤동희 쎄리라 안타 세리라 최강 롯데 자이언츠 윤동희 (안타!)" },
     ]
   },
 
