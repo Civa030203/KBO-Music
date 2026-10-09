@@ -17,38 +17,38 @@ export const cheerSongs = {
   // },
   // ==============================================================================
 
-  "대한민국 야구 국가대표팀": {
-    teamID: "WBC",
-    teamColor1: "#000225",
-    teamColor2: "#00022e",
-    logo: "https://civa030203.github.io/KBO-Music/korea.svg",
-    songs: [
-      { title: "No.2 문보경", playerTeam: "LG", playerID: "69102", lyrics: "오오오 문보경 LG의 문보경 (안타!) LG의 문보경 문보경 안타를 날려라 (안타!)\n오오오 문보경 LG의 문보경 (안타!) LG의 문보경 문보경 안타를 날려라 (안타!)" },
-      { title: "No.3 정준재", playerTeam: "SK", playerID: "54812", lyrics: "치고 달려 정준재 랜더스의 정준재 더 빠르게 더 멀리 치고 달려라\n치고 달려 정준재 랜더스의 정준재 더 빠르게 더 멀리 치고 달려라" },
-      { title: "No.5 김도영", playerTeam: "HT", playerID: "52605", lyrics: "김도영 힘차게 날려라 KIA의 승리를 위하여 워우워우 워우워 날려라\n김도영 힘차게 날려라 KIA의 승리를 위하여 워우워우 워우워 날려라" },
-      { title: "No.7 김주원", playerTeam: "NC", playerID: "51907", lyrics: "다이노 김주원 오 NC 김주원 힘차게 달려 라랄랄라 오오오 NC 김주원 승리를 위해 라랄라\n오 NC 김주원 힘차게 달려 라랄랄라 오오 NC 김주원 승리를 위해 라랄라 다이노스 김! 주! 원!" },
-      { title: "No.8 노시환", playerTeam: "HH", playerID: "69737", lyrics: "오 노시환 오오오오오오오 날려줘요 환상적으로 안타 홈런 오오오오\n오 노시환 오오오오오오오 날려줘요 환상적으로 안타 홈런 오오오오오 노! 시! 환!" },
-      { title: "No.12 김건희", playerTeam: "WO", playerID: "53312", lyrics: "안타! 안타! 안타! 김건희!\n키움 히어로즈 김건희 오 히어로즈 김건희 안방마님 김건희 오오오 (김! 건! 희!)\n키움 히어로즈 김건희 오 히어로즈 김건희 안방마님 김건희 오오오 (김! 건! 희!)" },
-      { title: "No.13 이재현", playerTeam: "SS", playerID: "52415", lyrics: "삼성의 이재현 빼뱀뺌빼배뱀 안타 빼뱀 삼성의 이재현 빼뱀뺌빼배뱀 홈런 빼뱀\n삼성의 이재현 빼뱀뺌빼배뱀 안타 빼뱀 삼성의 이재현 빼뱀뺌빼배뱀 홈런 빼뱀" },
-      { title: "No.14 박재현", playerTeam: "HT", playerID: "55636", lyrics: "밀어도 안타 당겨도 안타 날려라 안타 박재현!\n밀어도 안타 당겨도 안타 날려라 안타 박재현!\n안타! 박재현! 안타! 박재현!" },
-      { title: "No.15 김진욱", playerTeam: "LT", playerID: "51516", lyrics: "" },
-      { title: "No.17 김영우", playerTeam: "LG", playerID: "55167", lyrics: "" },
-      { title: "No.19 조병현", playerTeam: "SK", playerID: "51897", lyrics: "" },
-      { title: "No.20 조형우", playerTeam: "SK", playerID: "51865", lyrics: "조형우 워어어어 시원하게 날려라 워어어어 짜릿하게 넘겨라 워우워어 랜더스! 조형우!\n조형우 워어어어 시원하게 날려라 워어어어 짜릿하게 넘겨라 워우워어 랜더스! 조형우!" },
-      { title: "No.29 오원석", playerTeam: "KT", playerID: "50859", lyrics: "" },
-      { title: "No.30 소형준", playerTeam: "KT", playerID: "50030", lyrics: "" },
-      { title: "No.47 곽빈", playerTeam: "OB", playerID: "68220", lyrics: "" },
-      { title: "No.51 문현빈", playerTeam: "HH", playerID: "53764", lyrics: "한화 문현빈 오오오오 한화 문현빈 오오오오 최강 한화의 승리를 위해 오오오오오오오 한화 문현빈 오오오오 한화 문현빈 오오오오 최강 한화의 승리를 위해 오오오오오오오" },
-      { title: "No.52 박준순", playerTeam: "OB", playerID: "55252", lyrics: "베어스 (베어스!) 박준순 (박준순!) 두산의 승리 위해 치고 달려라\n베어스 (베어스!) 박준순 (박준순!) 두산의 승리 위해 치고 달려라" },
-      { title: "No.55 배찬승", playerTeam: "SS", playerID: "55455", lyrics: "" },
-      { title: "No.56 최준용", playerTeam: "LT", playerID: "50556", lyrics: "" },
-      { title: "No.58 김지찬", playerTeam: "SS", playerID: "50458", lyrics: "삼성의 김지찬 안타를 날려라 삼성의 김지찬 찬찬찬 김지찬!\n삼성의 김지찬 안타를 날려라 삼성의 김지찬 찬찬찬 김지찬!" },
-      { title: "No.60 박영현", playerTeam: "KT", playerID: "52060", lyrics: "" },
-      { title: "No.65 성영탁", playerTeam: "HT", playerID: "54610", lyrics: "" },
-      { title: "No.68 최민석", playerTeam: "OB", playerID: "55268", lyrics: "" },
-      { title: "No.91 윤동희", playerTeam: "LT", playerID: "52591", lyrics: "롯데의 윤동희 쎄리라 안타 쎄리라 최강 롯데 자이언츠 윤동희 (안타!)\n롯데의 윤동희 쎄리라 안타 세리라 최강 롯데 자이언츠 윤동희 (안타!)" },
-    ]
-  },
+  // "대한민국 야구 국가대표팀": {
+  //   teamID: "WBC",
+  //   teamColor1: "#000225",
+  //   teamColor2: "#00022e",
+  //   logo: "https://civa030203.github.io/KBO-Music/korea.svg",
+  //   songs: [
+  //     { title: "No.2 문보경", playerTeam: "LG", playerID: "69102", lyrics: "오오오 문보경 LG의 문보경 (안타!) LG의 문보경 문보경 안타를 날려라 (안타!)\n오오오 문보경 LG의 문보경 (안타!) LG의 문보경 문보경 안타를 날려라 (안타!)" },
+  //     { title: "No.3 정준재", playerTeam: "SK", playerID: "54812", lyrics: "치고 달려 정준재 랜더스의 정준재 더 빠르게 더 멀리 치고 달려라\n치고 달려 정준재 랜더스의 정준재 더 빠르게 더 멀리 치고 달려라" },
+  //     { title: "No.5 김도영", playerTeam: "HT", playerID: "52605", lyrics: "김도영 힘차게 날려라 KIA의 승리를 위하여 워우워우 워우워 날려라\n김도영 힘차게 날려라 KIA의 승리를 위하여 워우워우 워우워 날려라" },
+  //     { title: "No.7 김주원", playerTeam: "NC", playerID: "51907", lyrics: "다이노 김주원 오 NC 김주원 힘차게 달려 라랄랄라 오오오 NC 김주원 승리를 위해 라랄라\n오 NC 김주원 힘차게 달려 라랄랄라 오오 NC 김주원 승리를 위해 라랄라 다이노스 김! 주! 원!" },
+  //     { title: "No.8 노시환", playerTeam: "HH", playerID: "69737", lyrics: "오 노시환 오오오오오오오 날려줘요 환상적으로 안타 홈런 오오오오\n오 노시환 오오오오오오오 날려줘요 환상적으로 안타 홈런 오오오오오 노! 시! 환!" },
+  //     { title: "No.12 김건희", playerTeam: "WO", playerID: "53312", lyrics: "안타! 안타! 안타! 김건희!\n키움 히어로즈 김건희 오 히어로즈 김건희 안방마님 김건희 오오오 (김! 건! 희!)\n키움 히어로즈 김건희 오 히어로즈 김건희 안방마님 김건희 오오오 (김! 건! 희!)" },
+  //     { title: "No.13 이재현", playerTeam: "SS", playerID: "52415", lyrics: "삼성의 이재현 빼뱀뺌빼배뱀 안타 빼뱀 삼성의 이재현 빼뱀뺌빼배뱀 홈런 빼뱀\n삼성의 이재현 빼뱀뺌빼배뱀 안타 빼뱀 삼성의 이재현 빼뱀뺌빼배뱀 홈런 빼뱀" },
+  //     { title: "No.14 박재현", playerTeam: "HT", playerID: "55636", lyrics: "밀어도 안타 당겨도 안타 날려라 안타 박재현!\n밀어도 안타 당겨도 안타 날려라 안타 박재현!\n안타! 박재현! 안타! 박재현!" },
+  //     { title: "No.15 김진욱", playerTeam: "LT", playerID: "51516", lyrics: "" },
+  //     { title: "No.17 김영우", playerTeam: "LG", playerID: "55167", lyrics: "" },
+  //     { title: "No.19 조병현", playerTeam: "SK", playerID: "51897", lyrics: "" },
+  //     { title: "No.20 조형우", playerTeam: "SK", playerID: "51865", lyrics: "조형우 워어어어 시원하게 날려라 워어어어 짜릿하게 넘겨라 워우워어 랜더스! 조형우!\n조형우 워어어어 시원하게 날려라 워어어어 짜릿하게 넘겨라 워우워어 랜더스! 조형우!" },
+  //     { title: "No.29 오원석", playerTeam: "KT", playerID: "50859", lyrics: "" },
+  //     { title: "No.30 소형준", playerTeam: "KT", playerID: "50030", lyrics: "" },
+  //     { title: "No.47 곽빈", playerTeam: "OB", playerID: "68220", lyrics: "" },
+  //     { title: "No.51 문현빈", playerTeam: "HH", playerID: "53764", lyrics: "한화 문현빈 오오오오 한화 문현빈 오오오오 최강 한화의 승리를 위해 오오오오오오오 한화 문현빈 오오오오 한화 문현빈 오오오오 최강 한화의 승리를 위해 오오오오오오오" },
+  //     { title: "No.52 박준순", playerTeam: "OB", playerID: "55252", lyrics: "베어스 (베어스!) 박준순 (박준순!) 두산의 승리 위해 치고 달려라\n베어스 (베어스!) 박준순 (박준순!) 두산의 승리 위해 치고 달려라" },
+  //     { title: "No.55 배찬승", playerTeam: "SS", playerID: "55455", lyrics: "" },
+  //     { title: "No.56 최준용", playerTeam: "LT", playerID: "50556", lyrics: "" },
+  //     { title: "No.58 김지찬", playerTeam: "SS", playerID: "50458", lyrics: "삼성의 김지찬 안타를 날려라 삼성의 김지찬 찬찬찬 김지찬!\n삼성의 김지찬 안타를 날려라 삼성의 김지찬 찬찬찬 김지찬!" },
+  //     { title: "No.60 박영현", playerTeam: "KT", playerID: "52060", lyrics: "" },
+  //     { title: "No.65 성영탁", playerTeam: "HT", playerID: "54610", lyrics: "" },
+  //     { title: "No.68 최민석", playerTeam: "OB", playerID: "55268", lyrics: "" },
+  //     { title: "No.91 윤동희", playerTeam: "LT", playerID: "52591", lyrics: "롯데의 윤동희 쎄리라 안타 쎄리라 최강 롯데 자이언츠 윤동희 (안타!)\n롯데의 윤동희 쎄리라 안타 세리라 최강 롯데 자이언츠 윤동희 (안타!)" },
+  //   ]
+  // },
 
   "LG 트윈스": {
     teamID: "LG",
@@ -147,13 +147,6 @@ export const cheerSongs = {
       { title: "No.24 김민식", playerID: "62864", lyrics: "오 김민식 안타 오오오오오 오 김민식 안타 오오오오오오\n오 김민식 안타 오오오오오 오 김민식 안타 오오오오오오" },
       { title: "No.56 김성민", playerID: "50848", lyrics: "김성민 날려라 오오오오오 김성민 오 안타 날려라\n김성민 날려라 오오오오오 김성민 오 안타 날려라" },
       { title: "No.31 김성욱", playerID: "62934", lyrics: "김성욱 랜더스를 위해 날려라 워어어 랜더스 김성욱 (안타!)\n김성윽 랜더스를 위해 달려라 워어어 랜더스 김성욱 (김성욱!)" },
-      {
-        title: "No.6 김성현", playerID: "76802",
-        cheers: [
-          { title: "응원가 1", fileName: "76802_1", lyrics: "랜더스의 김성현 날려버려 김성현 아아아아아아아아 안타 오오오오오오오오 안타\n랜더스의 김성현 날려버려 김성현 아아아아아아아아 안타 오오오오오오오오 안타" },
-          { title: "응원가 2", fileName: "76802_2", lyrics: "날려라 불꽃 투혼 랜더스의 김성현 날려라 불꽃 투혼 랜더스의 김성현\n세상에 빛이 되는 너의 안타를 보여줘 가자 김! 성! 현! 승리 위해" },
-        ]
-      },
       { title: "No.32 김재환", playerID: "78224", lyrics: "안타 홈런 쭉 날려라 랜더스의 김재환 안타 홈런 쭉 날려라 랜더스! 김재환!\n안타 홈런 쭉 날려라 랜더스의 김재환 안타 홈런 쭉 날려라 랜더스! 김재환!" },
       { title: "No.64 김창평", playerID: "69825", lyrics: "김창평 안타 김창평 안타 랜더스의 김창평 김창평 안타 김창평 안타 랜더스의 김창평\n김창평 안타 김창평 안타 랜더스의 김창평 김창평 안타 김창평 안타 랜더스의 김창평" },
       { title: "No.45 류효승", playerID: "50868", lyrics: "랜더스 류효승 오오오오오 오오오 오오오 랜! 더! 스! 류! 효! 승!\n랜더스 류효승 오오오오오 오오오 오오오 랜! 더! 스! 류! 효! 승!" },
@@ -319,7 +312,6 @@ export const cheerSongs = {
       { title: "No.10 이대호", playerID: "71564", isLegend: true, retired: 2022, lyrics: "오 롯데 이대호 오오 롯데 이대호 오 롯데 이대호 롯데 이대호 롯데 이대호 오오오오오\n오 롯데 이대호 오오 롯데 이대호 오 롯데 이대호 롯데 이대호 롯데 이대호" },
       { title: "No.2 고승민", playerID: "69517", lyrics: "롯데의 고승민 안타 안타 롯데의 고승민 안타 안타\n워어어어어어어어어어 워어어어어어어어어어 롯데의 고승민 안타 안타" },
       { title: "No.50 김동혁", playerID: "52504", lyrics: "롯데 자이언츠 김동혁 오오오오 김동혁 롯데 자이언츠 김동혁 롯데 김동혁 오오오오 (안타! 김동혁!)\n롯데 자이언츠 김동혁 오오오오 김동혁 롯데 자이언츠 김동혁 롯데 김동혁 오오오오 (안타! 김동혁!)" },
-      { title: "No.16 김민성", playerID: "77564", lyrics: "롯데의 김민성 오오오오오오오오 롯데의 김민성 오오오오오오오오\n롯데의 김민성 오오오오오오오오 롯데의 김민성 오오오오오오오오" },
       { title: "No.43 나균안", playerID: "67539", lyrics: "롯데 나종덕 롯데 나종덕 롯데 나종덕 오오오오\n롯데 나종덕 롯데 나종덕 롯데 나종덕 오오오오" },
       { title: "No.51 나승엽", playerID: "51551", lyrics: "자이언츠 나승엽 쎄리라 안타 안타 자이언츠 나승엽 오오오오오오오\n자이언츠 나승엽 쎄리라 안타 안타 자이언츠 나승엽 오오오오오오오" },
       { title: "No.52 노진혁", playerID: "62931", lyrics: "롯데 노진혁 롯데 노진혁 오오오 안타 홈런 오오오오오오오 안타 홈런 오오오오오오오\n롯데 노진혁 롯데 노진혁 오오오 안타 홈런 오오오오오오오 안타 홈런 오오오오오오오 롯데 노진혁" },
@@ -491,13 +483,6 @@ export const cheerSongs = {
       { title: "No.12 알렉스 홀", playerID: "31012", lyrics: "웨일즈 알렉스 홀 날려버려라 웨일즈 알렉스 홀 날려버려라 웨일즈 알렉스 홀 날려버려라 웨일즈 알렉스 홀 날려버려라\n웨일즈 알렉스 홀 날려버려라 울산 웨일즈 알! 렉! 스! 홀!" },
       { title: "No.13 이민석", playerID: "52209", lyrics: "울산 웨일즈의 이민석 안타 날려버려라 오오오오 오 울산 이민석 울산 웨일즈의 이민석 안타 날려버려라 오오오오 오 울산 이민석\n울산 웨일즈의 이민석 안타 날려버려라 오오오오 오 울산 이민석 울산 웨일즈의 이민석 안타 날려버려라 오오오오 오 울산 이민석" },
       { title: "No.23 예진원", playerID: "68330", lyrics: "예예예예예 예진원! 예예예예예 예진원!" },
-      {
-        title: "No.9 최지만", playerID: "31009",
-        cheers: [
-          { title: "응원가 1", fileName: "31009_1", lyrics: "울! 산! 최지만!\n많이 많이 많이 많이 최지만 안타 홈런 많이 많이 최지만 최강 울산 승리하러 간다 홈! 런! 최지만!\n많이 많이 많이 많이 최지만 안타 홈런 많이 많이 최지만 최강 울산 승리하러 간다 홈! 런! 최지만!" },
-          { title: "응원가 2", fileName: "31009_2", lyrics: "날려버려 웨일즈의 최지만 승리를 위하여 워어어어어 날려버려 웨일즈의 최지만 웨일즈의 초이 워어어어어\n날려버려 웨일즈의 최지만 승리를 위하여 워어어어어 날려버려 웨일즈의 최지만 웨일즈의 초이 워어어어어" }
-        ]
-      },
     ]
   }
 };
