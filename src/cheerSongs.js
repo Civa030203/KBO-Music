@@ -405,13 +405,7 @@ export const cheerSongs = {
     teamColor2: "#b07f4a",
     logo: "https://statiz.co.kr/data/team/ci/2025/10001.svg",
     songs: [
-      {
-        title: "No.52 박병호", playerID: "75125", isLegend: true, retired: 2021,
-        cheers: [
-          { title: "응원가 1", fileName: "75125_2", lyrics: "홈런! 홈런! 홈! 런! 박병호!\n홈런! 홈런! 홈! 런! 박병호!" },
-          { title: "응원가 2", fileName: "75125_1", lyrics: "워어우워 홈런! 워어우워 홈런! 히어로즈 박병호 워어우워 워워 워어우워 히어로즈 박병호\n워어우워 홈런! 워어우워 홈런! 히어로즈 박병호 워어우워 워워 워어우워 히어로즈 박병호" },
-        ]
-      },
+      { title: "No.52 박병호", playerID: "75125", isLegend: true, retired: 2021, lyrics: "워어우워 홈런! 워어우워 홈런! 히어로즈 박병호 워어우워 워워 워어우워 히어로즈 박병호\n워어우워 홈런! 워어우워 홈런! 히어로즈 박병호 워어우워 워워 워어우워 히어로즈 박병호" },
       {
         title: "No.7 김하성", playerID: "64300", isLegend: true, retired: 2020,
         cheers: [
