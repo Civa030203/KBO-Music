@@ -1,8 +1,23 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { cheerSongs as currentCheerSongs } from "./cheerSongs";
-import { cheerSongs as oldCheerSongs } from "./oldCheerSongs";
+import { getInitialSongData, syncRemoteSongData } from "./utils/songDataService";
 import { useLocation, useNavigate } from "react-router-dom";
+import {
+  updateMediaSessionMetadata,
+  updateMediaSessionPlaybackState,
+  updateMediaSessionPositionState,
+  registerMediaSessionActionHandlers,
+  clearMediaSessionActionHandlers,
+} from "./utils/mediaSession";
+import {
+  initNativeAppUI,
+  registerNativeBackButton,
+} from "./utils/nativeApp";
+import {
+  isIOSNativeAudio,
+  KboAudioPlayer,
+  buildNativeTrackPayload,
+} from "./utils/iosNativeAudio";
 
 const PLAYLIST_STORAGE_KEY = "kbo_music_playlist_v1";
 
@@ -21,28 +36,53 @@ function getProfileUrl(song, category) {
 function getAudioUrl({ category, type, teamID, playerTeam, fileName, playerID }) {
   const targetFile = fileName || playerID;
   if (category === "memories") {
-    return `https://civa030203.github.io/KBO-Music/music/player/old/${teamID}/${targetFile}.mp3`;
+    const folder = type === "intro" ? "intro/old" : "player/old";
+    return `https://civa030203.github.io/KBO-Music/music/${folder}/${teamID}/${targetFile}.mp3`;
   }
   const folder = type === "intro" ? "intro" : "player";
   const targetTeam = teamID === "WBC" ? playerTeam : teamID;
   return `https://civa030203.github.io/KBO-Music/music/${folder}/${targetTeam}/${targetFile}.mp3`;
 }
 
+// 선수의 등장곡 목록 추출 헬퍼 (방식 A 적용)
+function getIntroItems(song, category) {
+  if (song.intros && Array.isArray(song.intros) && song.intros.length > 0) {
+    return song.intros.map((intro, idx) => ({
+      title: intro.title || (song.intros.length > 1 ? `등장곡 ${idx + 1}` : "등장곡"),
+      fileName: intro.fileName || song.fileName || song.playerID,
+    }));
+  }
+  if (category === "current") {
+    if (song.hasIntro === false) return [];
+    return [{ title: "등장곡", fileName: song.fileName || song.playerID }];
+  }
+  if (category === "memories") {
+    if (song.hasIntro === true) {
+      return [{ title: "등장곡", fileName: song.fileName || song.playerID }];
+    }
+    return [];
+  }
+  return [];
+}
+
 // 표준 트랙 아이템 생성 헬퍼
-function createTrackItem({ song, teamName, teamData, category, type, cheerObj = null }) {
-  const fileName = cheerObj ? cheerObj.fileName : song.fileName;
+function createTrackItem({ song, teamName, teamData, category, type, cheerObj = null, introObj = null }) {
+  const fileName =
+    type === "intro"
+      ? (introObj ? introObj.fileName : song.fileName)
+      : (cheerObj ? cheerObj.fileName : song.fileName);
+
   const typeLabel =
     type === "intro"
-      ? "등장곡"
-      : cheerObj
-      ? cheerObj.title || "응원가"
-      : "응원가";
+      ? (introObj ? introObj.title || "등장곡" : "등장곡")
+      : (cheerObj ? cheerObj.title || "응원가" : "응원가");
+
   const lyrics =
     type === "intro"
       ? ""
       : cheerObj
-      ? cheerObj.lyrics || ""
-      : song.lyrics || "";
+        ? cheerObj.lyrics || ""
+        : song.lyrics || "";
 
   return {
     uid: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
@@ -80,17 +120,20 @@ function createTrackItem({ song, teamName, teamData, category, type, cheerObj = 
 // 한 선수의 모든 트랙 생성 (팀 전체 재생/담기용)
 function buildTracksForSong(song, teamName, teamData, category) {
   const tracks = [];
-  if (category === "current") {
+  const introItems = getIntroItems(song, category);
+  introItems.forEach((introObj) => {
     tracks.push(
       createTrackItem({
         song,
         teamName,
         teamData,
-        category: "current",
+        category,
         type: "intro",
+        introObj,
       })
     );
-  }
+  });
+
   if (song.cheers && song.cheers.length > 0) {
     song.cheers.forEach((cheerObj) => {
       tracks.push(
@@ -130,9 +173,8 @@ function formatTime(sec) {
 function TrackActionButton({ label, onPlay, onAdd, color, isActive }) {
   return (
     <div
-      className={`inline-flex items-stretch rounded-xl overflow-hidden shadow-sm transition-transform active:scale-95 ${
-        isActive ? "ring-2 ring-yellow-300" : ""
-      }`}
+      className={`inline-flex items-stretch rounded-xl overflow-hidden shadow-sm transition-transform active:scale-95 ${isActive ? "ring-2 ring-yellow-300" : ""
+        }`}
       style={{ backgroundColor: color || "#334155" }}
     >
       <button
@@ -169,10 +211,11 @@ function PlayerSongCard({
   onAddTrack,
 }) {
   const profileUrl = getProfileUrl(song, category);
+  const introItems = getIntroItems(song, category);
 
-  const isTrackCurrent = (type, cheerObj = null) => {
+  const isTrackCurrent = (type, itemObj = null) => {
     if (!currentTrack) return false;
-    const fileName = cheerObj ? cheerObj.fileName : song.fileName;
+    const fileName = itemObj ? itemObj.fileName : song.fileName;
     const key = `${category}-${teamData.teamID}-${song.playerID}-${type}-${fileName || "default"}`;
     return currentTrack.trackKey === key;
   };
@@ -197,9 +240,8 @@ function PlayerSongCard({
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 flex-wrap">
                 <span
-                  className={`text-sm md:text-base font-bold truncate ${
-                    song.isLegend ? "text-amber-300" : "text-white"
-                  }`}
+                  className={`text-sm md:text-base font-bold truncate ${song.isLegend ? "text-amber-300" : "text-white"
+                    }`}
                 >
                   {song.title}
                 </span>
@@ -226,11 +268,10 @@ function PlayerSongCard({
                 <span>{teamName}</span>
               </div>
               <span
-                className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-                  category === "current"
-                    ? "bg-emerald-500/30 text-emerald-100 border border-emerald-300/30"
-                    : "bg-amber-500/30 text-amber-100 border border-amber-300/30"
-                }`}
+                className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${category === "current"
+                  ? "bg-emerald-500/30 text-emerald-100 border border-emerald-300/30"
+                  : "bg-amber-500/30 text-amber-100 border border-amber-300/30"
+                  }`}
               >
                 {category === "current" ? "현재 응원가" : "추억의 응원가"}
               </span>
@@ -240,19 +281,21 @@ function PlayerSongCard({
 
         {/* 하단: 재생 및 플레이리스트 추가 버튼들 */}
         <div className="flex gap-2 flex-wrap pt-0.5">
-          {category === "current" && (
+          {introItems.map((introObj, idx) => (
             <TrackActionButton
-              label="등장곡"
+              key={`intro-${idx}`}
+              label={introObj.title}
               color={teamData.teamColor2}
-              isActive={isTrackCurrent("intro")}
+              isActive={isTrackCurrent("intro", introObj)}
               onPlay={() =>
                 onPlayTrack(
                   createTrackItem({
                     song,
                     teamName,
                     teamData,
-                    category: "current",
+                    category,
                     type: "intro",
+                    introObj,
                   })
                 )
               }
@@ -262,18 +305,19 @@ function PlayerSongCard({
                     song,
                     teamName,
                     teamData,
-                    category: "current",
+                    category,
                     type: "intro",
+                    introObj,
                   })
                 )
               }
             />
-          )}
+          ))}
 
           {song.cheers && song.cheers.length > 0 ? (
             song.cheers.map((cheer, idx) => (
               <TrackActionButton
-                key={idx}
+                key={`cheer-${idx}`}
                 label={cheer.title || `응원가 ${idx + 1}`}
                 color={teamData.teamColor2}
                 isActive={isTrackCurrent("cheer", cheer)}
@@ -342,6 +386,27 @@ const App = ({ initialMode }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // 응원가/등장곡 데이터 상태 (로컬 캐시 즉시 로드 + 원격 백그라운드 동기화)
+  const [songData, setSongData] = useState(() => getInitialSongData());
+  const currentCheerSongs = songData.current;
+  const oldCheerSongs = songData.memories;
+
+  // 마운트 시 원격 최신 데이터 백그라운드 동기화 (앱 업데이트 없이 즉시 반영)
+  useEffect(() => {
+    let isMounted = true;
+    syncRemoteSongData().then((updated) => {
+      if (isMounted && updated) {
+        setSongData((prev) => ({
+          current: updated.current || prev.current,
+          memories: updated.memories || prev.memories,
+        }));
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // 현재 응원가("current") vs 추억의 응원가("memories") 상태
   const [activeCategory, setActiveCategory] = useState(() => {
     if (initialMode === "memories" || location.pathname === "/memories") {
@@ -383,6 +448,13 @@ const App = ({ initialMode }) => {
 
   // 오디오 컨트롤 상태
   const audioRef = useRef(null);
+  const lastPositionSyncRef = useRef(0);
+  const mediaActionsRef = useRef({});
+  const audioEndedRef = useRef(() => { });
+  const audioErrorRef = useRef(() => { });
+  const currentTimeRef = useRef(0);
+  const durationRef = useRef(0);
+  const backButtonRef = useRef(() => false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -430,10 +502,31 @@ const App = ({ initialMode }) => {
     }
   };
 
-  // 현재 트랙 변경 시 오디오 소스 업데이트 및 자동 재생
+  // 현재 트랙 변경 시 오디오 소스 업데이트, 자동 재생 및 네이티브 미디어 세션 메타데이터 동기화
   useEffect(() => {
+    if (!currentTrack) return;
+
+    lastPositionSyncRef.current = 0;
+    currentTimeRef.current = 0;
+    durationRef.current = 0;
+    setCurrentTime(0);
+    setDuration(0);
+
+    if (isIOSNativeAudio) {
+      KboAudioPlayer.loadAndPlay(buildNativeTrackPayload(currentTrack))
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(() => {
+          setIsPlaying(false);
+        });
+      return;
+    }
+
     const audio = audioRef.current;
-    if (!audio || !currentTrack) return;
+    if (!audio) return;
+
+    updateMediaSessionMetadata(currentTrack);
 
     if (audio.src !== currentTrack.audioSrc) {
       audio.src = currentTrack.audioSrc;
@@ -442,15 +535,107 @@ const App = ({ initialMode }) => {
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise
-        .then(() => setIsPlaying(true))
-        .catch(() => setIsPlaying(false));
+        .then(() => {
+          setIsPlaying(true);
+          updateMediaSessionPlaybackState("playing");
+        })
+        .catch(() => {
+          setIsPlaying(false);
+          updateMediaSessionPlaybackState("paused");
+        });
     }
   }, [currentTrack]);
 
+  // 재생 상태 변경 시 네이티브 미디어 세션 동기화
+  useEffect(() => {
+    if (isIOSNativeAudio) return;
+
+    const state = isPlaying ? "playing" : currentTrack ? "paused" : "none";
+    updateMediaSessionPlaybackState(state);
+    if (audioRef.current && Number.isFinite(audioRef.current.duration) && audioRef.current.duration > 0) {
+      updateMediaSessionPositionState({
+        duration: audioRef.current.duration,
+        position: audioRef.current.currentTime,
+        playbackRate: isPlaying ? audioRef.current.playbackRate || 1.0 : 0.0,
+      });
+    }
+  }, [isPlaying, currentTrack]);
+
+  // 네이티브 앱 UI 초기화 및 미디어 세션 / 뒤로가기 핸들러 등록
+  useEffect(() => {
+    initNativeAppUI();
+    const unregisterBackButton = registerNativeBackButton(backButtonRef);
+
+    // Safari 16.4+ 웹 환경에서도 백그라운드 재생이 끊기지 않도록 audioSession 타입 지정
+    try {
+      if (typeof navigator !== "undefined" && "audioSession" in navigator && navigator.audioSession) {
+        navigator.audioSession.type = "playback";
+      }
+    } catch {
+      // 미지원 브라우저 무시
+    }
+
+    if (!isIOSNativeAudio) {
+      registerMediaSessionActionHandlers(mediaActionsRef);
+      return () => {
+        unregisterBackButton();
+        clearMediaSessionActionHandlers();
+      };
+    }
+
+    // iOS 네이티브 AVPlayer 이벤트 리스너 등록
+    const listenerPromises = [
+      KboAudioPlayer.addListener("timeUpdate", (data) => {
+        const nextTime = typeof data?.currentTime === "number" ? data.currentTime : 0;
+        const nextDuration = typeof data?.duration === "number" ? data.duration : 0;
+        currentTimeRef.current = nextTime;
+        setCurrentTime(nextTime);
+        if (nextDuration > 0) {
+          durationRef.current = nextDuration;
+          setDuration(nextDuration);
+        }
+      }),
+      KboAudioPlayer.addListener("loadedMetadata", (data) => {
+        const nextDuration = typeof data?.duration === "number" ? data.duration : 0;
+        if (nextDuration > 0) {
+          durationRef.current = nextDuration;
+          setDuration(nextDuration);
+        }
+      }),
+      KboAudioPlayer.addListener("playbackStateChanged", (data) => {
+        setIsPlaying(Boolean(data?.isPlaying));
+      }),
+      KboAudioPlayer.addListener("ended", () => {
+        audioEndedRef.current?.();
+      }),
+      KboAudioPlayer.addListener("error", () => {
+        audioErrorRef.current?.();
+      }),
+      KboAudioPlayer.addListener("remoteAction", (data) => {
+        const action = data?.action;
+        if (action === "nexttrack") {
+          mediaActionsRef.current?.onNextTrack?.();
+        } else if (action === "previoustrack") {
+          mediaActionsRef.current?.onPreviousTrack?.();
+        } else if (action === "seekto" && typeof data?.seekTime === "number") {
+          currentTimeRef.current = data.seekTime;
+          setCurrentTime(data.seekTime);
+        }
+      }),
+    ];
+
+    return () => {
+      unregisterBackButton();
+      Promise.all(listenerPromises)
+        .then((handles) => {
+          handles.forEach((handle) => handle?.remove?.());
+        })
+        .catch(() => { });
+    };
+  }, []);
+
   // 재생 / 일시정지 토글
   const togglePlayPause = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
     if (!currentTrack && playlist.length > 0) {
       setCurrentPlaylistIndex(0);
       setCurrentTrack(playlist[0]);
@@ -458,8 +643,19 @@ const App = ({ initialMode }) => {
     }
     if (!currentTrack) return;
 
+    if (isIOSNativeAudio) {
+      if (isPlaying) {
+        KboAudioPlayer.pause().catch(() => { });
+      } else {
+        KboAudioPlayer.play().catch(() => { });
+      }
+      return;
+    }
+
+    const audio = audioRef.current;
+    if (!audio) return;
     if (audio.paused) {
-      audio.play().catch(() => {});
+      audio.play().catch(() => { });
     } else {
       audio.pause();
     }
@@ -493,6 +689,31 @@ const App = ({ initialMode }) => {
 
   // 이전 곡 재생
   const handlePrevTrack = () => {
+    if (isIOSNativeAudio) {
+      if (currentTimeRef.current > 3) {
+        currentTimeRef.current = 0;
+        setCurrentTime(0);
+        KboAudioPlayer.seekTo({ time: 0 }).catch(() => { });
+        return;
+      }
+      if (playlist.length === 0) return;
+
+      const prevIdx = currentPlaylistIndex - 1;
+      if (prevIdx >= 0) {
+        setCurrentPlaylistIndex(prevIdx);
+        setCurrentTrack(playlist[prevIdx]);
+      } else if (repeatMode === "all") {
+        const lastIdx = playlist.length - 1;
+        setCurrentPlaylistIndex(lastIdx);
+        setCurrentTrack(playlist[lastIdx]);
+      } else if (currentPlaylistIndex >= 0 && playlist[currentPlaylistIndex]) {
+        currentTimeRef.current = 0;
+        setCurrentTime(0);
+        KboAudioPlayer.seekTo({ time: 0 }).catch(() => { });
+      }
+      return;
+    }
+
     const audio = audioRef.current;
     if (audio && audio.currentTime > 3) {
       audio.currentTime = 0;
@@ -515,10 +736,20 @@ const App = ({ initialMode }) => {
 
   // 오디오 종료 이벤트
   const handleAudioEnded = () => {
-    const audio = audioRef.current;
-    if (repeatMode === "one" && audio) {
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
+    if (repeatMode === "one") {
+      if (isIOSNativeAudio) {
+        currentTimeRef.current = 0;
+        setCurrentTime(0);
+        KboAudioPlayer.seekTo({ time: 0 })
+          .then(() => KboAudioPlayer.play())
+          .catch(() => { });
+        return;
+      }
+      const audio = audioRef.current;
+      if (audio) {
+        audio.currentTime = 0;
+        audio.play().catch(() => { });
+      }
       return;
     }
     if (playlist.length > 0 && currentPlaylistIndex !== -1) {
@@ -536,6 +767,90 @@ const App = ({ initialMode }) => {
       setIsPlaying(false);
       showToast("음원 파일을 불러올 수 없습니다.");
     }
+  };
+
+  audioEndedRef.current = handleAudioEnded;
+  audioErrorRef.current = handleAudioError;
+
+  // 네이티브 잠금화면 / 제어센터 / 알림창 미디어 버튼 최신 콜백 유지
+  mediaActionsRef.current = {
+    onPlay: () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+      if (!currentTrack && playlist.length > 0) {
+        setCurrentPlaylistIndex(0);
+        setCurrentTrack(playlist[0]);
+        return;
+      }
+      audio.play().catch(() => { });
+    },
+    onPause: () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    },
+    onPreviousTrack: () => {
+      handlePrevTrack();
+    },
+    onNextTrack: () => {
+      handleNextTrack();
+    },
+    onSeekTo: (seekTime) => {
+      const audio = audioRef.current;
+      if (!audio || typeof seekTime !== "number" || !Number.isFinite(seekTime)) return;
+      const maxDuration = Number.isFinite(audio.duration) ? audio.duration : seekTime;
+      const clamped = Math.max(0, Math.min(seekTime, maxDuration));
+      audio.currentTime = clamped;
+      setCurrentTime(clamped);
+      updateMediaSessionPositionState({
+        duration: audio.duration,
+        position: clamped,
+        playbackRate: audio.paused ? 0.0 : audio.playbackRate || 1.0,
+      });
+    },
+    onSeekBy: (deltaSec) => {
+      const audio = audioRef.current;
+      if (!audio || !Number.isFinite(audio.duration)) return;
+      const nextTime = Math.max(0, Math.min(audio.currentTime + deltaSec, audio.duration));
+      audio.currentTime = nextTime;
+      setCurrentTime(nextTime);
+      updateMediaSessionPositionState({
+        duration: audio.duration,
+        position: nextTime,
+        playbackRate: audio.paused ? 0.0 : audio.playbackRate || 1.0,
+      });
+    },
+    onStop: () => {
+      const audio = audioRef.current;
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+      setCurrentTime(0);
+      setIsPlaying(false);
+      updateMediaSessionPlaybackState("none");
+    },
+  };
+
+  // Android 하드웨어 뒤로가기 버튼 최신 상태 콜백 유지
+  backButtonRef.current = () => {
+    if (isMobileSheetOpen) {
+      setIsMobileSheetOpen(false);
+      return true;
+    }
+    if (isTeamDropdownOpen) {
+      setIsTeamDropdownOpen(false);
+      return true;
+    }
+    if (searchQuery.trim().length > 0) {
+      setSearchQuery("");
+      return true;
+    }
+    if (selectedTeam) {
+      setSelectedTeam("");
+      return true;
+    }
+    return false;
   };
 
   // 즉시 재생 핸들러
@@ -699,14 +1014,14 @@ const App = ({ initialMode }) => {
       current: currentMatches,
       memories: memoriesMatches,
     };
-  }, [searchQuery]);
+  }, [searchQuery, currentCheerSongs, oldCheerSongs]);
 
   const displayedSearchResults =
     searchScope === "current"
       ? searchResults.current
       : searchScope === "memories"
-      ? searchResults.memories
-      : searchResults.all;
+        ? searchResults.memories
+        : searchResults.all;
 
   const isSearching = searchQuery.trim().length > 0;
 
@@ -785,8 +1100,11 @@ const App = ({ initialMode }) => {
             value={Math.min(currentTime, duration || 0)}
             onChange={(e) => {
               const val = Number(e.target.value);
+              currentTimeRef.current = val;
               setCurrentTime(val);
-              if (audioRef.current) {
+              if (isIOSNativeAudio) {
+                KboAudioPlayer.seekTo({ time: val }).catch(() => { });
+              } else if (audioRef.current) {
                 audioRef.current.currentTime = val;
               }
             }}
@@ -803,9 +1121,8 @@ const App = ({ initialMode }) => {
           <button
             type="button"
             onClick={() => setIsShuffle(!isShuffle)}
-            className={`px-2 py-1 rounded-lg text-xs font-bold transition-colors ${
-              isShuffle ? "bg-white text-black" : "text-white/75 hover:text-white"
-            }`}
+            className={`px-2 py-1 rounded-lg text-xs font-bold transition-colors ${isShuffle ? "bg-white text-black" : "text-white/75 hover:text-white"
+              }`}
             title="셔플 재생"
           >
             🔀 셔플
@@ -841,9 +1158,8 @@ const App = ({ initialMode }) => {
           <button
             type="button"
             onClick={cycleRepeatMode}
-            className={`px-2 py-1 rounded-lg text-xs font-bold transition-colors ${
-              repeatMode !== "none" ? "bg-white text-black" : "text-white/75 hover:text-white"
-            }`}
+            className={`px-2 py-1 rounded-lg text-xs font-bold transition-colors ${repeatMode !== "none" ? "bg-white text-black" : "text-white/75 hover:text-white"
+              }`}
             title="반복 설정"
           >
             {repeatMode === "one" ? "🔂 한곡" : repeatMode === "all" ? "🔁 전체" : "🔁 끔"}
@@ -905,15 +1221,13 @@ const App = ({ initialMode }) => {
                 <div
                   key={item.uid || `${item.trackKey}-${idx}`}
                   onClick={() => handleSelectPlaylistItem(idx)}
-                  className={`px-3.5 py-2.5 flex items-center justify-between gap-2 cursor-pointer transition-colors ${
-                    isCurrent ? "bg-red-50/90" : "hover:bg-gray-50"
-                  }`}
+                  className={`px-3.5 py-2.5 flex items-center justify-between gap-2 cursor-pointer transition-colors ${isCurrent ? "bg-red-50/90" : "hover:bg-gray-50"
+                    }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0 flex-1">
                     <span
-                      className={`text-xs font-bold w-5 text-center flex-shrink-0 ${
-                        isCurrent ? "text-red-600" : "text-gray-400"
-                      }`}
+                      className={`text-xs font-bold w-5 text-center flex-shrink-0 ${isCurrent ? "text-red-600" : "text-gray-400"
+                        }`}
                     >
                       {isCurrent ? "🔊" : idx + 1}
                     </span>
@@ -925,9 +1239,8 @@ const App = ({ initialMode }) => {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-1.5">
                         <span
-                          className={`text-xs md:text-sm truncate ${
-                            isCurrent ? "font-extrabold text-red-600" : "font-semibold text-gray-800"
-                          }`}
+                          className={`text-xs md:text-sm truncate ${isCurrent ? "font-extrabold text-red-600" : "font-semibold text-gray-800"
+                            }`}
                         >
                           {item.title}
                         </span>
@@ -983,15 +1296,48 @@ const App = ({ initialMode }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-gray-100 pb-28 md:pb-12">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-gray-100 safe-page-bottom">
       {/* 단일 전역 오디오 엘리먼트 (탭 전환이나 화면 크기 변경에도 끊기지 않음) */}
       <audio
         ref={audioRef}
+        playsInline
+        preload="auto"
         onTimeUpdate={() => {
-          if (audioRef.current) setCurrentTime(audioRef.current.currentTime);
+          const audio = audioRef.current;
+          if (!audio) return;
+          setCurrentTime(audio.currentTime);
+          const now = Date.now();
+          if (now - lastPositionSyncRef.current >= 1000 && Number.isFinite(audio.duration) && audio.duration > 0) {
+            lastPositionSyncRef.current = now;
+            updateMediaSessionPositionState({
+              duration: audio.duration,
+              position: audio.currentTime,
+              playbackRate: audio.paused ? 0.0 : audio.playbackRate || 1.0,
+            });
+          }
         }}
         onLoadedMetadata={() => {
-          if (audioRef.current) setDuration(audioRef.current.duration || 0);
+          const audio = audioRef.current;
+          if (!audio) return;
+          const nextDuration = audio.duration || 0;
+          setDuration(nextDuration);
+          if (nextDuration > 0) {
+            updateMediaSessionPositionState({
+              duration: nextDuration,
+              position: audio.currentTime || 0,
+              playbackRate: audio.paused ? 0.0 : audio.playbackRate || 1.0,
+            });
+          }
+        }}
+        onSeeked={() => {
+          const audio = audioRef.current;
+          if (!audio || !Number.isFinite(audio.duration) || audio.duration <= 0) return;
+          lastPositionSyncRef.current = Date.now();
+          updateMediaSessionPositionState({
+            duration: audio.duration,
+            position: audio.currentTime,
+            playbackRate: audio.paused ? 0.0 : audio.playbackRate || 1.0,
+          });
         }}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
@@ -1007,7 +1353,7 @@ const App = ({ initialMode }) => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-gray-900/95 text-white text-xs md:text-sm font-semibold px-4 py-2.5 rounded-full shadow-lg border border-white/15 whitespace-nowrap"
+            className="fixed safe-toast-top left-1/2 -translate-x-1/2 z-50 bg-gray-900/95 text-white text-xs md:text-sm font-semibold px-4 py-2.5 rounded-full shadow-lg border border-white/15 whitespace-nowrap"
           >
             {toastMessage}
           </motion.div>
@@ -1015,40 +1361,38 @@ const App = ({ initialMode }) => {
       </AnimatePresence>
 
       {/* 상단 고정 헤더 */}
-      <header className="bg-red-600 text-white px-4 md:px-8 py-3.5 shadow-md fixed top-0 left-0 w-full z-40">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      <header className="bg-red-600 text-white shadow-md fixed top-0 left-0 w-full z-40 safe-area-top">
+        <div className="px-4 md:px-8 py-3.5 max-w-7xl mx-auto flex items-center justify-between gap-3">
           <h1
             onClick={() => {
               setSearchQuery("");
               setIsTeamDropdownOpen(false);
             }}
-            className="text-lg md:text-xl font-extrabold tracking-tight cursor-pointer flex items-center gap-2"
+            className="text-lg md:text-xl font-extrabold tracking-tight cursor-pointer flex items-center gap-2 min-w-0 truncate"
           >
             <span>⚾</span>
-            <span>프로야구 응원가 플레이어</span>
+            <span className="truncate">프로야구 응원가 플레이어</span>
           </h1>
 
           {/* 현재 응원가 / 추억의 응원가 세그먼트 탭 */}
-          <div className="bg-red-800/70 p-1 rounded-xl flex items-center text-xs md:text-sm font-bold">
+          <div className="bg-red-800/70 p-1 rounded-xl flex items-center text-xs md:text-sm font-bold flex-shrink-0">
             <button
               type="button"
               onClick={() => handleCategoryChange("current")}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
-                activeCategory === "current"
-                  ? "bg-white text-red-600 shadow-sm"
-                  : "text-red-100 hover:text-white"
-              }`}
+              className={`px-3 py-1.5 rounded-lg transition-all ${activeCategory === "current"
+                ? "bg-white text-red-600 shadow-sm"
+                : "text-red-100 hover:text-white"
+                }`}
             >
               현재 응원가
             </button>
             <button
               type="button"
               onClick={() => handleCategoryChange("memories")}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
-                activeCategory === "memories"
-                  ? "bg-white text-red-600 shadow-sm"
-                  : "text-red-100 hover:text-white"
-              }`}
+              className={`px-3 py-1.5 rounded-lg transition-all ${activeCategory === "memories"
+                ? "bg-white text-red-600 shadow-sm"
+                : "text-red-100 hover:text-white"
+                }`}
             >
               추억의 응원가
             </button>
@@ -1057,7 +1401,7 @@ const App = ({ initialMode }) => {
       </header>
 
       {/* 메인 컨텐츠 - 데스크톱 좌우 2단 분할 */}
-      <main className="pt-20 md:pt-24 px-4 md:px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6">
+      <main className="safe-main-top px-4 md:px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* 왼쪽 컬럼: 검색 + 팀 선택 + 선수 응원가 리스트 */}
         <div className="md:col-span-7 lg:col-span-7 space-y-5">
           {/* 컨트롤 박스: 통합 선수 검색 + 구단 선택 드롭다운 */}
@@ -1072,7 +1416,7 @@ const App = ({ initialMode }) => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="선수 이름 또는 등번호 검색 (현재·추억의 응원가 통합)"
-                className="w-full pl-9 pr-9 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition-all"
+                className="w-full pl-9 pr-9 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-base md:text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition-all"
               />
               {searchQuery && (
                 <button
@@ -1153,33 +1497,30 @@ const App = ({ initialMode }) => {
                   <button
                     type="button"
                     onClick={() => setSearchScope("all")}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${
-                      searchScope === "all"
-                        ? "bg-red-600 text-white"
-                        : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
-                    }`}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${searchScope === "all"
+                      ? "bg-red-600 text-white"
+                      : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+                      }`}
                   >
                     전체 ({searchResults.all.length})
                   </button>
                   <button
                     type="button"
                     onClick={() => setSearchScope("current")}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${
-                      searchScope === "current"
-                        ? "bg-red-600 text-white"
-                        : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
-                    }`}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${searchScope === "current"
+                      ? "bg-red-600 text-white"
+                      : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+                      }`}
                   >
                     현재 응원가 ({searchResults.current.length})
                   </button>
                   <button
                     type="button"
                     onClick={() => setSearchScope("memories")}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${
-                      searchScope === "memories"
-                        ? "bg-red-600 text-white"
-                        : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
-                    }`}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${searchScope === "memories"
+                      ? "bg-red-600 text-white"
+                      : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+                      }`}
                   >
                     추억의 응원가 ({searchResults.memories.length})
                   </button>
@@ -1290,11 +1631,10 @@ const App = ({ initialMode }) => {
 
                   {/* 선수 카드 리스트 */}
                   <div
-                    className={`grid gap-3 ${
-                      activeCategory === "memories"
-                        ? "grid-cols-1 sm:grid-cols-2"
-                        : "grid-cols-1"
-                    }`}
+                    className={`grid gap-3 ${activeCategory === "memories"
+                      ? "grid-cols-1 sm:grid-cols-2"
+                      : "grid-cols-1"
+                      }`}
                   >
                     {activeDataMap[selectedTeam].songs.map((song, index) => (
                       <motion.div
@@ -1339,7 +1679,7 @@ const App = ({ initialMode }) => {
 
       {/* 모바일 전용 하단 미니 플레이어 바 (화면의 40%를 차지하던 기존 상단 고정 플레이어 대체) */}
       {(currentTrack || playlist.length > 0) && (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-gray-900/95 backdrop-blur-md text-white shadow-2xl border-t border-white/15">
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-gray-900/95 backdrop-blur-md text-white shadow-2xl border-t border-white/15 safe-area-bottom">
           {/* 상단 미니 진행 상태바 */}
           <div className="w-full h-1 bg-white/15 overflow-hidden">
             <div
@@ -1457,22 +1797,20 @@ const App = ({ initialMode }) => {
                   <button
                     type="button"
                     onClick={() => setMobileTab("player")}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${
-                      mobileTab === "player"
-                        ? "bg-red-600 text-white"
-                        : "bg-gray-100 text-gray-600"
-                    }`}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${mobileTab === "player"
+                      ? "bg-red-600 text-white"
+                      : "bg-gray-100 text-gray-600"
+                      }`}
                   >
                     현재 재생 / 가사
                   </button>
                   <button
                     type="button"
                     onClick={() => setMobileTab("playlist")}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${
-                      mobileTab === "playlist"
-                        ? "bg-red-600 text-white"
-                        : "bg-gray-100 text-gray-600"
-                    }`}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${mobileTab === "playlist"
+                      ? "bg-red-600 text-white"
+                      : "bg-gray-100 text-gray-600"
+                      }`}
                   >
                     플레이리스트 ({playlist.length})
                   </button>
@@ -1489,7 +1827,7 @@ const App = ({ initialMode }) => {
               </div>
 
               {/* 시트 내부 스크롤 컨텐츠 */}
-              <div className="p-4 overflow-y-auto space-y-4">
+              <div className="p-4 overflow-y-auto space-y-4 safe-area-bottom">
                 {mobileTab === "player" ? renderPlayerCard() : renderPlaylistPanel()}
               </div>
             </motion.div>

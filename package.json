@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.6.2",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.4",
+    "@capgo/capacitor-media-session": "^8.1.11",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -15,8 +20,16 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "export:data": "node scripts/export-data.js",
+    "prestart": "npm run export:data",
     "start": "react-scripts start",
+    "prebuild": "npm run export:data",
     "build": "react-scripts build",
+    "build:mobile": "node scripts/export-data.js && node scripts/build-mobile.js",
+    "cap:sync": "npm run build:mobile && npx cap sync",
+    "cap:ios": "npx cap open ios",
+    "cap:android": "npx cap open android",
+    "cap:assets": "npx capacitor-assets generate --ios --android --iconBackgroundColor '#dc2626' --splashBackgroundColor '#dc2626' --splashBackgroundColorDark '#7f1d1d'",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
@@ -42,6 +55,10 @@
     ]
   },
   "devDependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/assets": "^4.0.0",
+    "@capacitor/cli": "^8.6.2",
+    "@capacitor/ios": "^8.6.2",
     "gh-pages": "^6.3.0"
   }
 }
