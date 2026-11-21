@@ -287,7 +287,7 @@ export const cheerSongs = {
       { title: "No.22 김광삼", playerID: "99152", hasIntro: true, memory: 2017, lyrics: "김광삼 날려라 날려버려 김광삼 날려라 날려버려 김광삼 날려라 날려버려 안! 타! 김! 광! 삼!", misc: "2016 시즌 종료 후 은퇴" },
       { title: "No.12 김기연", playerID: "66112", hasIntro: true, memory: 2023, lyrics: "힘차게 (안타!) 김기연 (안타!) 김기연 날려버려 (안! 타! 김! 기! 연!)\n힘차게 (안타!) 김기연 (안타!) 김기연 날려버려 (안! 타! 김! 기! 연!)", misc: "2023년 11월 22일 2차 드래프트로 두산 이적" },
       { title: "No.16 김민성", playerID: "77564", hasIntro: true, memory: 2023, lyrics: "무적 LG 승리를 위해 날려버려 날려버려 김민성 날려버려 날려버려 김민성 날려버려 날려버려 김민성 무적 LG 승리를 위해", misc: "2024년 1월 26일 사인 앤드 트레이드로 롯데 이적" },
-      { title: "No.26 김상현", playerID: "70646", hasIntro: true, memory: 2017, lyrics: "날려라 날려라 김상현 날려라 날려라 김상현\n날려라 날려라 김상현 날려라 날려라 김상현", misc: "2009년 4월 19일 트레이드로 KIA 이적" },
+      { title: "No.26 김상현", playerID: "70646", memory: 2017, lyrics: "날려라 날려라 김상현 날려라 날려라 김상현\n날려라 날려라 김상현 날려라 날려라 김상현", misc: "2009년 4월 19일 트레이드로 KIA 이적" },
       {
         title: "No.5 김용의", playerID: "78217", hasIntro: true, memory: 2021,
         cheers: [
@@ -297,7 +297,7 @@ export const cheerSongs = {
         misc: "2021 시즌 종료 후 은퇴"
       },
       { title: "No.13 김일경", playerID: "97300", hasIntro: true, memory: 2017, lyrics: "LG 김일경 트윈스의 승리 위해 날려라 김일경 오오오오오오 날려라 LG 김일경", misc: "2013년 11월 12일 은퇴" },
-      { title: "No.12 김재성", playerID: "65132", hasIntro: true, memory: 2021, lyrics: "LG의 김재성 오오오오 힘차게 날려버려 (김! 재! 성!)\nLG의 김재성 오오오오 힘차게 날려버려 (김! 재! 성!)", misc: "2021년 12월 22일 FA 박해민 보상선수로 삼성 이적" },
+      { title: "No.12 김재성", playerID: "65132", memory: 2021, lyrics: "LG의 김재성 오오오오 힘차게 날려버려 (김! 재! 성!)\nLG의 김재성 오오오오 힘차게 날려버려 (김! 재! 성!)", misc: "2021년 12월 22일 FA 박해민 보상선수로 삼성 이적" },
       {
         title: "No.16 김재율", playerID: "61114", hasIntro: true, memory: 2019,
         cheers: [
@@ -307,8 +307,8 @@ export const cheerSongs = {
         misc: "2019 시즌 종료 후 방출"
       },
       { title: "No.14 김정율", playerID: "67504", hasIntro: true, memory: 2026, lyrics: "안타 안타 LG 김민수 안타 안타 LG 김민수 안타 안타 LG 김민수 오! 김민수\n안타 안타 LG 김민수 안타 안타 LG 김민수 안타 안타 LG 김민수 오! 김민수", misc: "2026년 10월 22일 방출" },
-      { title: "No.42 김태군", playerID: "78122", hasIntro: true, memory: 2017, lyrics: "LG 김태군 LG 김태군 LG 김태군 안타 날려줘요 김태군 안타 날린다면 사랑할 거야\nLG 김태군 LG 김태군 LG 김태군 안타 날려줘요 김태군 안타 날린다면 사랑할 거야", misc: "2012년 11월 15일 신생팀 특별지명으로 NC 이적" },
-      { title: "No.10 김태완", playerID: "74158", hasIntro: true, memory: 2017, lyrics: "LG의 김태완 LG의 김태완 안타 한 방 날려줘요 LG의 김태완 랄라랄라랄라 랄라랄라랄라 랄라랄라랄라랄라 LG의 김태완", misc: "2012년 12월 14일 트레이드로 삼성 이적" },
+      { title: "No.42 김태군", playerID: "78122", memory: 2017, lyrics: "LG 김태군 LG 김태군 LG 김태군 안타 날려줘요 김태군 안타 날린다면 사랑할 거야\nLG 김태군 LG 김태군 LG 김태군 안타 날려줘요 김태군 안타 날린다면 사랑할 거야", misc: "2012년 11월 15일 신생팀 특별지명으로 NC 이적" },
+      { title: "No.10 김태완", playerID: "74158", memory: 2017, lyrics: "LG의 김태완 LG의 김태완 안타 한 방 날려줘요 LG의 김태완 랄라랄라랄라 랄라랄라랄라 랄라랄라랄라랄라 LG의 김태완", misc: "2012년 12월 14일 트레이드로 삼성 이적" },
       {
         title: "No.22 김현수", playerID: "76290", hasIntro: true, memory: 2025,
         cheers: [
@@ -318,15 +318,15 @@ export const cheerSongs = {
         ],
         misc: "2025년 11월 25일 FA로 KT 이적"
       },
-      { title: "No.34 김호은", playerID: "66113", hasIntro: true, memory: 2022, lyrics: "오오오오 오 LG 김호은 오 LG 김호은 저 하늘 끝까지 저 멀리 날려줘 (김! 호! 은!)\n오 LG 김호은 오 LG 김호은 저 하늘 끝까지 저 멀리 날려줘 (김! 호! 은!)", misc: "2022년 11월 8일 방출" },
-      { title: "No.27 나성용", playerID: "61742", hasIntro: true, memory: 2016, lyrics: "무적 LG 워어어어 나성용 승리 위해 워어어어 나성용\n무적 LG 워어어어 나성용 승리 위해 워어어어 나성용", misc: "2015년 11월 27일 2차 드래프트로 삼성 이적" },
+      { title: "No.34 김호은", playerID: "66113", memory: 2022, lyrics: "오오오오 오 LG 김호은 오 LG 김호은 저 하늘 끝까지 저 멀리 날려줘 (김! 호! 은!)\n오 LG 김호은 오 LG 김호은 저 하늘 끝까지 저 멀리 날려줘 (김! 호! 은!)", misc: "2022년 11월 8일 방출" },
+      { title: "No.27 나성용", playerID: "61742", memory: 2016, lyrics: "무적 LG 워어어어 나성용 승리 위해 워어어어 나성용\n무적 LG 워어어어 나성용 승리 위해 워어어어 나성용", misc: "2015년 11월 27일 2차 드래프트로 삼성 이적" },
       { title: "No.44 로베르토 라모스", playerID: "50165", hasIntro: true, memory: 2021, lyrics: "로베르토 라모스 라라라라라라 라모스 로베르토 라모스 오오오오오오 라모스!\n로베르토 라모스 라라라라라라 라모스 로베르토 라모스 오오오오오오 라모스!", misc: "2021년 6월 29일 방출" },
-      { title: "No.29 로베르토 페타지니", playerID: "78129", hasIntro: true, memory: 2017, lyrics: "페 페 페타지니 오오오 오오오 오오오 오오오오 페 페 페타지니 오오오 오오오 오오오오오오\n페 페 페타지니 오오오 오오오 오오오 오오오오 페 페 페타지니 오오오 오오오 오오오오오오오", misc: "2009 시즌 종료 후 자유 계약으로 후쿠오카 소프트뱅크 호크스 이적" },
+      { title: "No.29 로베르토 페타지니", playerID: "78129", memory: 2017, lyrics: "페 페 페타지니 오오오 오오오 오오오 오오오오 페 페 페타지니 오오오 오오오 오오오오오오\n페 페 페타지니 오오오 오오오 오오오 오오오오 페 페 페타지니 오오오 오오오 오오오오오오오", misc: "2009 시즌 종료 후 자유 계약으로 후쿠오카 소프트뱅크 호크스 이적" },
       { title: "No.25 로벨 가르시아", playerID: "52125", hasIntro: true, memory: 2022, lyrics: "LG 로벨 가르시아 LG 로벨 가르시아 무적 LG의 가르시아 오오오오 가! 르! 시! 아!\nLG 로벨 가르시아 LG 로벨 가르시아 무적 LG의 가르시아 오오오오 가! 르! 시! 아!", misc: "2022년 10월 6일 방출" },
       { title: "No.3 루이스 히메네스", playerID: "65103", hasIntro: true, memory: 2017, lyrics: "L! G! 히메네스 오오오 오오오 오오오 오오오오 L! G! 히메네스 오오오 오오오 오오오오오오\nL! G! 히메네스 오오오 오오오 오오오 오오오오 L! G! 히메네스 오오오 오오오 오오오오오오", misc: "2017년 7월 18일 방출" },
-      { title: "No.6 류지현", playerID: "94106", hasIntro: true, memory: 2022, lyrics: "날려라 날려라 류지현 안타 류지현 (안타!)\n날려라 날려라 류지현 안타 류지현 (안타!)", misc: "2004 시즌 종료 후 은퇴" },
-      { title: "No.12 리오 루이즈", playerID: "52112", hasIntro: true, memory: 2022, lyrics: "무적 LG 루이즈 오오오 Go! Go! 루이즈 승리를 위하여 날려버려 GO! GO! 루이즈!\n무적 LG 루이즈 오오오 Go! Go! 루이즈 승리를 위하여 날려버려 GO! GO! 루이즈!", misc: "2022년 5월 30일 방출" },
-      { title: "No.49 마해영", playerID: "95549", hasIntro: true, memory: 2017, lyrics: "홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우!\n홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우!", misc: "2007 시즌 종료 후 방출 후 롯데 이적", link: "https://civa030203.github.io/KBO-Music/profiles/95549_lg_cropped.png" },
+      { title: "No.6 류지현", playerID: "94106", memory: 2022, lyrics: "날려라 날려라 류지현 안타 류지현 (안타!)\n날려라 날려라 류지현 안타 류지현 (안타!)", misc: "2004 시즌 종료 후 은퇴" },
+      { title: "No.12 리오 루이즈", playerID: "52112", memory: 2022, lyrics: "무적 LG 루이즈 오오오 Go! Go! 루이즈 승리를 위하여 날려버려 GO! GO! 루이즈!\n무적 LG 루이즈 오오오 Go! Go! 루이즈 승리를 위하여 날려버려 GO! GO! 루이즈!", misc: "2022년 5월 30일 방출" },
+      { title: "No.49 마해영", playerID: "95549", memory: 2017, lyrics: "홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우!\n홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우! 홈런! 마해영 와우!", misc: "2007 시즌 종료 후 방출 후 롯데 이적", link: "https://civa030203.github.io/KBO-Music/profiles/95549_lg_cropped.png" },
       {
         title: "No.49 문선재", playerID: "79113", hasIntro: true, memory: 2018,
         cheers: [
@@ -336,7 +336,7 @@ export const cheerSongs = {
       },
       { title: "No.6 박경수", playerID: "73113", hasIntro: true, memory: 2017, lyrics: "날려라 날려라 박경수 안타 박경수 (안타!) 날려라 날려라 박경수 안타 박경수 (안타!)", misc: "2014년 11월 28일 FA로 KT 이적" },
       {
-        title: "No.25 박병호", playerID: "75125", hasIntro: true, memory: 2017,
+        title: "No.25 박병호", playerID: "75125", memory: 2017,
         cheers: [
           { title: "응원가 1", fileName: "75125_1", lyrics: "안타 박병호 (박병호~) 날려버려 날려버려 박병호 (박병호~) 안타 박병호 (박병호~) 날려버려 박병호 (안타!)\n안타 박병호 (박병호~) 날려버려 날려버려 박병호 (박병호~) 안타 박병호 (박병호~) 날려버려 박병호 (안타!)" },
           { title: "응원가 2", fileName: "75125_2", lyrics: "무적 LG 박병호 무적 LG 박병호 무적 LG 박병호 L! G! 박병호!\n무적 LG 박병호 무적 LG 박병호 무적 LG 박병호 L! G! 박병호!" }
@@ -345,28 +345,27 @@ export const cheerSongs = {
         misc: "2011년 7월 31일 트레이드로 넥센 이적"
       },
       { title: "No.3 박용근", playerID: "77104", hasIntro: true, memory: 2019, lyrics: "박용근 날려버려 날려버려 박용근 날려버려 날려버려 박용근 날려버려 날려버려 안! 타! 박용근!", misc: "2015년 4월 20일 트레이드로 KT 이적" },
-      { title: "No.24 박재욱", playerID: "64100", hasIntro: true, memory: 2022, lyrics: "무적 LG 박재욱 오오오오 오오오오오 LG의 박재욱 오오오오 오오오오\n무적 LG 박재욱 오오오오 오오오오오 LG의 박재욱 오오오오 오오오오", misc: "2022년 7월 12일 은퇴" },
-      { title: "No.31 박종호", playerID: "92906", hasIntro: true, memory: 2018, lyrics: "LG의 박종호 LG의 박종호 안타 한 방 날려줘요 LG의 박종호\n랄라랄라랄라 랄라랄라랄라 랄라랄라랄라랄라 LG의 박종호", misc: "2010년 5월 27일 은퇴" },
-      { title: "No.66 박지규", playerID: "65136", hasIntro: true, memory: 2020, lyrics: "박지규 안타 박지규 안타 박지규 안타 타타타\n박지규 안타 박지규 안타 박지규 안타 타타타", misc: "2020년 11월 7일 방출" },
+      { title: "No.24 박재욱", playerID: "64100", memory: 2022, lyrics: "무적 LG 박재욱 오오오오 오오오오오 LG의 박재욱 오오오오 오오오오\n무적 LG 박재욱 오오오오 오오오오오 LG의 박재욱 오오오오 오오오오", misc: "2022년 7월 12일 은퇴" },
+      { title: "No.31 박종호", playerID: "92906", memory: 2018, lyrics: "LG의 박종호 LG의 박종호 안타 한 방 날려줘요 LG의 박종호\n랄라랄라랄라 랄라랄라랄라 랄라랄라랄라랄라 LG의 박종호", misc: "2010년 5월 27일 은퇴" },
+      { title: "No.66 박지규", playerID: "65136", memory: 2020, lyrics: "박지규 안타 박지규 안타 박지규 안타 타타타\n박지규 안타 박지규 안타 박지규 안타 타타타", misc: "2020년 11월 7일 방출" },
       { title: "No.52 백창수", playerID: "60100", hasIntro: true, memory: 2017, lyrics: "LG의 백창수 워어어 무적 LG 승리를 위해 날려라 날려버려 LG 백창수\nLG의 백창수 워어어 무적 LG 승리를 위해 날려라 날려버려 (오~ 백! 창! 수!)", misc: "2017년 11월 22일 2차 드래프트로 한화 이적" },
-      { title: "No.51 봉중근", playerID: "77147", hasIntro: true, memory: 2018, lyrics: "", misc: "2018 시즌 종료 후 은퇴" },
-      { title: "No.58 브래드 스나이더", playerID: "64158", hasIntro: true, memory: 2017, lyrics: "L! G! 스나이더 오오오 오오오 오오오 오오오오 L! G! 스나이더 오오오 오오오 오오오오오오\nL! G! 스나이더 오오오 오오오 오오오 오오오오 L! G! 스나이더 오오오 오오오 오오오오오오", misc: "2014년 11월 25일 방출 후 넥센 이적" },
+      { title: "No.58 브래드 스나이더", playerID: "64158", memory: 2017, lyrics: "L! G! 스나이더 오오오 오오오 오오오 오오오오 L! G! 스나이더 오오오 오오오 오오오오오오\nL! G! 스나이더 오오오 오오오 오오오 오오오오 L! G! 스나이더 오오오 오오오 오오오오오오", misc: "2014년 11월 25일 방출 후 넥센 이적" },
       { title: "No.14 서건창", playerID: "78168", hasIntro: true, memory: 2023, lyrics: "LG의 서건창 승리 위해 달려라 LG의 서건창 오오오 (서! 건! 창!)\nLG의 서건창 승리 위해 달려라 LG의 서건창 오오오 (서! 건! 창!)", misc: "2023년 11월 25일 방출 후 KIA 이적" },
-      { title: "No.3 서동욱", playerID: "73606", hasIntro: true, memory: 2017, lyrics: "LG의 서동욱 LG의 서동욱 LG의 서동욱 날려버려 서동욱\nLG의 서동욱 LG의 서동욱 LG의 서동욱 날려버려 서동욱", misc: "2013년 4월 24일 트레이드로 넥센 이적" },
+      { title: "No.3 서동욱", playerID: "73606", memory: 2017, lyrics: "LG의 서동욱 LG의 서동욱 LG의 서동욱 날려버려 서동욱\nLG의 서동욱 LG의 서동욱 LG의 서동욱 날려버려 서동욱", misc: "2013년 4월 24일 트레이드로 넥센 이적" },
       { title: "No.52 서상우", playerID: "62164", hasIntro: true, memory: 2019, lyrics: "오오오오 오 LG 서상우 오 LG 서상우 저 하늘 끝까지 저 멀리 날려줘 (서! 상! 우!)\n오 LG 서상우 오 LG 서상우 저 하늘 끝까지 저 멀리 날려줘 (서! 상! 우!)", misc: "2019 시즌 종료 후 은퇴" },
-      { title: "No.62 서용빈", playerID: "94162", hasIntro: true, memory: 2017, lyrics: "서용빈 서용빈 서용빈 서용빈 서! 용! 빈! 날려버려!\n서용빈 서용빈 서용빈 서용빈 서! 용! 빈! 날려버려!", misc: "2006 시즌 종료 후 은퇴" },
-      { title: "No.23 손인호", playerID: "98538", hasIntro: true, memory: 2017, lyrics: "날려라 날려 손인호 안타 손인호 날려라 날려 손인호 안타 손인호\n날려라 날려 손인호 안타 손인호 날려라 날려 손인호 안타 손인호", misc: "2012 시즌 종료 후 은퇴" },
+      { title: "No.62 서용빈", playerID: "94162", memory: 2017, lyrics: "서용빈 서용빈 서용빈 서용빈 서! 용! 빈! 날려버려!\n서용빈 서용빈 서용빈 서용빈 서! 용! 빈! 날려버려!", misc: "2006 시즌 종료 후 은퇴" },
+      { title: "No.23 손인호", playerID: "98538", memory: 2017, lyrics: "날려라 날려 손인호 안타 손인호 날려라 날려 손인호 안타 손인호\n날려라 날려 손인호 안타 손인호 날려라 날려 손인호 안타 손인호", misc: "2012 시즌 종료 후 은퇴" },
       { title: "No.6 손주인", playerID: "72456", hasIntro: true, memory: 2017, lyrics: "날려라 날려 손주인 안타 손주인 날려라 날려 손주인 안타 손주인\n날려라 날려 손주인 안타 손주인 날려라 날려 손주인 안타 손주인", misc: "2017년 11월 22일 2차 드래프트로 삼성 이적" },
-      { title: "No.3 손지환", playerID: "97103", hasIntro: true, memory: 2024, lyrics: "안! 타! 손지환! 안! 타! 손지환!\n안! 타! 손지환! 안! 타! 손지환!", misc: "2003 시즌 종료 후 FA 진필중 보상선수로 KIA 이적" },
+      { title: "No.3 손지환", playerID: "97103", memory: 2024, lyrics: "안! 타! 손지환! 안! 타! 손지환!\n안! 타! 손지환! 안! 타! 손지환!", misc: "2003 시즌 종료 후 FA 진필중 보상선수로 KIA 이적" },
       { title: "No.7 손호영", playerID: "50150", hasIntro: true, memory: 2023, lyrics: "날려라 날려 손호영 안타 손호영 날려라 날려 손호영 안타 손호영\n날려라 날려 손호영 안타 손호영 날려라 날려 손호영 안타 손호영", misc: "2024년 3월 30일 트레이드로 롯데 이적" },
       {
-        title: "No.12 심광호", playerID: "96722", hasIntro: true, memory: 2016,
+        title: "No.12 심광호", playerID: "96722", memory: 2016,
         cheers: [
           { title: "응원가 1", fileName: "96722_1", lyrics: "무! 적! L! G! 심! 광! 호! 워어어어어어어어어 무! 적! L! G! 심! 광! 호! 워어어어어어어어어\n무! 적! L! G! 심! 광! 호! 워어어어어어어어어 무! 적! L! G! 심! 광! 호! 워어어어어어어어어" },
           { title: "응원가 2", fileName: "96722_2", lyrics: "LG의 심광호 워우워어어어어 안타를 날려버려 무적 LG 안방마님 심광호오오\nLG의 심광호 워우워어어어어 안타를 날려버려 무적! LG! 안방마님 심광호오오\n" }
         ], misc: "2012년 10월 2일 은퇴"
       },
-      { title: "No.3 아도니스 가르시아", playerID: "68103", hasIntro: true, memory: 2018, lyrics: "무! 적! L! G! 가르시아 가르시아 가르시아 Yeah 가르시아 가르시아 가르시아 Yeah\n가르시아 (Go!) 가르시아 (Go!) 가르시아 (Go!) 가르시아! n가르시아 (Go!) 가르시아 (Go!) 가르시아 (Go!) 가르시아!", misc: "2018 시즌 후 방출" },
+      { title: "No.3 아도니스 가르시아", playerID: "68103", memory: 2018, lyrics: "무! 적! L! G! 가르시아 가르시아 가르시아 Yeah 가르시아 가르시아 가르시아 Yeah\n가르시아 (Go!) 가르시아 (Go!) 가르시아 (Go!) 가르시아! n가르시아 (Go!) 가르시아 (Go!) 가르시아 (Go!) 가르시아!", misc: "2018 시즌 후 방출" },
       {
         title: "No.15 안익훈", playerID: "65115", hasIntro: true, memory: 2025,
         cheers: [
@@ -374,8 +373,8 @@ export const cheerSongs = {
           { title: "응원가 2", fileName: "65115_2", lyrics: "오 안익훈 오 안익훈 무적LG 승리 위하여 안익훈!\n오 안익훈 오 안익훈 무적LG 승리 위하여 안익훈!" }
         ], misc: "2025년 11월 5일 은퇴"
       },
-      { title: "No.5 안재만", playerID: "97157", hasIntro: true, memory: 2017, lyrics: "날려라 날려버려 안재만 (Hey!) 날려라 날려버려 안재만 (Hey!)\n날려라 날려버려 안재만 (Hey!) 날려라 날려버려 안재만 (Hey!)", misc: "2007 시즌 종료 후 방출 후 KIA 이적" },
-      { title: "No.61 안치용", playerID: "72161", hasIntro: true, memory: 2017, lyrics: "안치용 LG 안치용 (안! 치! 용! 무! 적! L! G! 안! 치! 용 오~ 오~)\n안치용 LG 안치용 (안! 치! 용! 무! 적! L! G! 안! 치! 용 오~ 오~)", misc: "2010년 7월 28일 트레이드로 SK 이적" },
+      { title: "No.5 안재만", playerID: "97157", memory: 2017, lyrics: "날려라 날려버려 안재만 (Hey!) 날려라 날려버려 안재만 (Hey!)\n날려라 날려버려 안재만 (Hey!) 날려라 날려버려 안재만 (Hey!)", misc: "2007 시즌 종료 후 방출 후 KIA 이적" },
+      { title: "No.61 안치용", playerID: "72161", memory: 2017, lyrics: "안치용 LG 안치용 (안! 치! 용! 무! 적! L! G! 안! 치! 용 오~ 오~)\n안치용 LG 안치용 (안! 치! 용! 무! 적! L! G! 안! 치! 용 오~ 오~)", misc: "2010년 7월 28일 트레이드로 SK 이적" },
       {
         title: "No.53 양석환", playerID: "64153", hasIntro: true, memory: 2020,
         cheers: [
@@ -386,28 +385,28 @@ export const cheerSongs = {
       { title: "No.8 양영동", playerID: "76459", hasIntro: true, memory: 2017, lyrics: "LG의 양영동 무적 LG 양영동 안타 안타 날려라 무적 LG 양영동 랄라랄랄라라 랄라랄라라\nLG의 양영동 무적 LG 양영동 안타 안타 날려라 무적 LG 양영동 랄라랄랄라라 랄라랄라라", misc: "2014 시즌 종료 후 은퇴" },
       { title: "No.27 유강남", playerID: "61102", hasIntro: true, memory: 2022, lyrics: "무적 LG (무적 LG) 유강남 (유강남) 오오오오오 LG의 (LG의) 유강남 (유강남) 오오오오오\n무적 LG (무적 LG) 유강남 (유강남) 오오오오오 LG의 (LG의) 유강남 (유강남) 오오오오오", misc: "2022년 11월 21일 FA로 롯데 이적" },
       { title: "No.44 윤요섭", playerID: "78892", hasIntro: true, memory: 2022, lyrics: "무적 LG 윤요섭 워어 Yeah 무적 LG 윤요섭 워어 Yeah\n무적 LG 윤요섭 (윤요섭) 워우워어어 무적 LG (무적 LG) 윤요섭 (윤요섭) 워어 Yeah", misc: "2015년 4월 20일 트레이드로 KT 이적" },
-      { title: "No.13 윤진호", playerID: "79198", hasIntro: true, memory: 2019, lyrics: "날려라 트윈스의 윤진호 파이팅 무적 LG 윤진호\n날려라 트윈스의 윤진호 파이팅 무적 LG 윤진호 워어어 파이팅 무적 LG 윤진호", misc: "2019 시즌 종료 후 은퇴" },
+      { title: "No.13 윤진호", playerID: "79198", memory: 2019, lyrics: "날려라 트윈스의 윤진호 파이팅 무적 LG 윤진호\n날려라 트윈스의 윤진호 파이팅 무적 LG 윤진호 워어어 파이팅 무적 LG 윤진호", misc: "2019 시즌 종료 후 은퇴" },
       { title: "No.53 이대형", playerID: "73153", hasIntro: true, memory: 2017, lyrics: "슈퍼소닉 이대형 안타 워어어어어어어어 안타\n슈퍼소닉 이대형 안타 워어어어어어어어 안타", misc: "2013년 11월 17일 FA로 KIA 이적" },
       { title: "No.7 이병규", playerID: "76100", hasIntro: true, memory: 2017, lyrics: "오오오 이병규 LG의 이병규 (안타!) LG의 이병규 이병규 안타를 날려라 (안타!)\n오오오 이병규 LG의 이병규 (안타!) LG의 이병규 이병규 안타를 날려라 (안타!)", misc: "2017년 11월 22일 2차 드래프트로 롯데 이적" },
       { title: "No.2 이상호", playerID: "60566", hasIntro: true, memory: 2022, lyrics: "오오오 오오오 LG 이상호 (호!) 오오오 오오오 LG 이상호 (호!) 무적 LG 승리 안타 날려 안타 LG 이상호 (호!) 무적 LG 승리 안타 날려 안타 LG 이상호 (호!)\n오오오 오오오 LG 이상호 (호!) 오오오 오오오 LG 이상호 (호!)", misc: "2022년 11월 8일 방출 후 KT 이적" },
-      { title: "No.4 이성우", playerID: "71184", hasIntro: true, memory: 2022, lyrics: "무적 LG 이성우 오오오오오 무적 LG 이성우 승리를 위해\n무적 LG 이성우 오오오오오 무적 LG 이성우 승리를 위해", misc: "2021 시즌 종료 후 은퇴" },
-      { title: "No.15 이종열", playerID: "91015", hasIntro: true, memory: 2017, lyrics: "이종열 안타 이종열 안타 이종열 안타 타타타\n이종열 안타 이종열 안타 이종열 안타 타타타", misc: "2009 시즌 종료 후 은퇴" },
+      { title: "No.4 이성우", playerID: "71184", memory: 2022, lyrics: "무적 LG 이성우 오오오오오 무적 LG 이성우 승리를 위해\n무적 LG 이성우 오오오오오 무적 LG 이성우 승리를 위해", misc: "2021 시즌 종료 후 은퇴" },
+      { title: "No.15 이종열", playerID: "91015", memory: 2017, lyrics: "이종열 안타 이종열 안타 이종열 안타 타타타\n이종열 안타 이종열 안타 이종열 안타 타타타", misc: "2009 시즌 종료 후 은퇴" },
       { title: "No.53 이주형", playerID: "50167", hasIntro: true, memory: 2021, lyrics: "날려라 LG 이주형 날려라 LG 이주형 오오오오 오오오오 (무! 적! L! G! 이! 주! 형)\n날려라 LG 이주형 날려라 LG 이주형 오오오오 오오오오 (무! 적! L! G! 이! 주! 형)", misc: "2023년 7월 29일 트레이드로 키움 이적" },
-      { title: "No.23 이지 알칸트라", playerID: "73123", hasIntro: true, memory: 2016, lyrics: "알칸트라 알칸트라 알! 칸! 트! 라! 알칸트라 알칸트라\n알칸트라 (짝짝짝 짝짝) 알칸트라 (짝짝짝 짝짝) 알칸트라 (짝짝짝 짝짝) 알칸트라 (짝짝짝 짝짝)", misc: "2003 시즌 후 방출 후 두산 이적" },
+      { title: "No.23 이지 알칸트라", playerID: "73123", memory: 2016, lyrics: "알칸트라 알칸트라 알! 칸! 트! 라! 알칸트라 알칸트라\n알칸트라 (짝짝짝 짝짝) 알칸트라 (짝짝짝 짝짝) 알칸트라 (짝짝짝 짝짝) 알칸트라 (짝짝짝 짝짝)", misc: "2003 시즌 후 방출 후 두산 이적" },
       { title: "No.35 이진영", playerID: "99810", hasIntro: true, memory: 2017, lyrics: "오 LG 이진영 오 LG 이진영 오 LG 이진영 워워워워 당당히 마주하라 LG 이진영\n오 LG 이진영 오 LG 이진영 오 LG 이진영 워워워워 당당히 마주하라 LG 이진영", misc: "2015년 11월 27일 2차 드래프트로 KT 이적" },
       { title: "No.32 이천웅", playerID: "61186", hasIntro: true, memory: 2023, lyrics: "무적 LG 이천웅 워어 Yeah 무적 LG 이천웅 워어 Yeah\n무적 LG 이천웅 (이천웅) 워우워어어 무적 LG (무적 LG) 이천웅 (이천웅) 워어 Yeah", misc: "2023년 11월 25일 방출" },
       { title: "No.36 이형종", playerID: "78135", hasIntro: true, memory: 2022, lyrics: "오 LG 이형종 오 LG 이형종 오 LG 이형종 워워워워 힘차게 달려가라 LG 이형종\n오 LG 이형종 오 LG 이형종 오 LG 이형종 워워워워 힘차게 달려가라 LG 이형종", misc: "2022년 11월 24일 퓨쳐스 FA로 키움 이적" },
       { title: "No.37 임재철", playerID: "99507", hasIntro: true, memory: 2017, lyrics: "임재철 LG의 임재철 강철 어깨 임재철 오오오오 LG 강철 어깨\n임재철 LG의 임재철 강철 어깨 임재철 오오오오 LG 강철 어깨 임재철", misc: "2014 시즌 종료 후 방출 후 롯데 이적" },
       { title: "No.24 임훈", playerID: "74823", hasIntro: true, memory: 2018, lyrics: "무적 LG 임훈 워어어어 무적 LG 임훈 워어어어 무적 LG 임훈 워어어어 치고 달려라 승리를 위하여\n무적 LG 임훈 워어어어 무적 LG 임훈 워어어어 무적 LG 임훈 워어어어 치고 달려라 승리를 위하여", misc: "2018년 10월 25일 은퇴" },
-      { title: "No.4 잭 한나한", playerID: "65104", hasIntro: true, memory: 2017, lyrics: "무적 LG 한나한 한나한 한나한 오오 LG의 한나한 무적 LG 한나한 한나한 한나한 오오 LG의 한나한\n무적 LG 한나한 한나한 한나한 오오 LG의 한나한 무적 LG 한나한 한나한 한나한 오오 LG의 한나한", misc: "2015 시즌 종료 후 은퇴" },
-      { title: "No.44 저스틴 보어", playerID: "51144", hasIntro: true, memory: 2021, lyrics: "LG 저스틴 보어 (짝짝) LG 저스틴 보어 (짝짝) 승리를 위하여 날려버려라\nLG 저스틴 보어 (짝짝) LG 저스틴 보어 (짝짝) 저 멀리 날려라 저스틴 보어", misc: "2021년 11월 30일 방출" },
-      { title: "No.8 정근우", playerID: "75808", hasIntro: true, memory: 2020, lyrics: "정근우 안타를 날려줘요 정근우 2루를 막아줘요 정근우 LG의 승리를 위해\n정근우 안타를 날려줘요 정근우 2루를 막아줘요 정근우 LG의 승리를 위해", misc: "2020년 11월 8일 은퇴" },
+      { title: "No.4 잭 한나한", playerID: "65104", memory: 2017, lyrics: "무적 LG 한나한 한나한 한나한 오오 LG의 한나한 무적 LG 한나한 한나한 한나한 오오 LG의 한나한\n무적 LG 한나한 한나한 한나한 오오 LG의 한나한 무적 LG 한나한 한나한 한나한 오오 LG의 한나한", misc: "2015 시즌 종료 후 은퇴" },
+      { title: "No.44 저스틴 보어", playerID: "51144", memory: 2021, lyrics: "LG 저스틴 보어 (짝짝) LG 저스틴 보어 (짝짝) 승리를 위하여 날려버려라\nLG 저스틴 보어 (짝짝) LG 저스틴 보어 (짝짝) 저 멀리 날려라 저스틴 보어", misc: "2021년 11월 30일 방출" },
+      { title: "No.8 정근우", playerID: "75808", memory: 2020, lyrics: "정근우 안타를 날려줘요 정근우 2루를 막아줘요 정근우 LG의 승리를 위해\n정근우 안타를 날려줘요 정근우 2루를 막아줘요 정근우 LG의 승리를 위해", misc: "2020년 11월 8일 은퇴" },
       { title: "No.42 정상호", playerID: "71842", hasIntro: true, memory: 2019, lyrics: "오 정상호 오 정상호 저 하늘 끝까지 날려 정상호\n오 정상호 오 정상호 저 하늘 끝까지 날려 정상호", misc: "2019 시즌 종료 후 방출 후 두산 이적" },
       { title: "No.16 정성훈", playerID: "99606", hasIntro: true, memory: 2017, lyrics: "안타 날려라 LG 정성훈 안타 날려라 LG 정성훈 날려라 날려라 날려라 날려라 무적 LG 정성훈 (정성훈!)\n안타 날려라 LG 정성훈 안타 날려라 LG 정성훈 날려라 날려라 날려라 날려라 무적 LG 정성훈 (정성훈!)", misc: "2017년 11월 22일 방출 후 KIA 이적" },
       { title: "No.24 정의윤", playerID: "75151", hasIntro: true, memory: 2016, lyrics: "정의윤 LG 정의윤 (정! 의! 윤! 무! 적! L! G! 정! 의! 윤! 오~ 오~)\n정의윤 LG 정의윤 (정! 의! 윤! 무! 적! L! G! 정! 의! 윤! 오~ 오~)", misc: "2015년 7월 24일 트레이드로 SK 이적" },
       { title: "No.7 정주현", playerID: "79150", hasIntro: true, memory: 2023, lyrics: "LG의 정주현 오 LG의 정주현 정주현 안타 정주현 안타 안타 오 오오오오오\nLG의 정주현 오 LG의 정주현 정주현 안타 정주현 안타 안타 오 오오오오오", misc: "2023 시즌 종료 후 은퇴" },
       { title: "No.00 조쉬 벨", playerID: "64154", hasIntro: true, memory: 2017, lyrics: "무적 LG (쿵쿵) 벨! 오오오오오오 (쿵쿵) 벨!\n무적 LG (쿵쿵) 벨! 오오오오오오 (쿵쿵) 벨!", misc: "2014년 7월 2일 방출" },
-      { title: "No.44 조인성", playerID: "98144", hasIntro: true, memory: 2021, lyrics: "오 조인성 조인성 오오오 오오오 오오오 LG의 조인성 날려줘 하늘 끝까지\n조인성 조인성 오오오 오오오 오오오 LG의 조인성 날려줘 하늘 끝까지", misc: "2011년 11월 22일 FA로 SK 이적" },
+      { title: "No.44 조인성", playerID: "98144", memory: 2021, lyrics: "오 조인성 조인성 오오오 오오오 오오오 LG의 조인성 날려줘 하늘 끝까지\n조인성 조인성 오오오 오오오 오오오 LG의 조인성 날려줘 하늘 끝까지", misc: "2011년 11월 22일 FA로 SK 이적" },
       { title: "No.4 조윤준", playerID: "62147", hasIntro: true, memory: 2018, lyrics: "오 조윤준 조윤준 오오오 오오오 오오오 LG의 조윤준 날려줘 하늘 끝까지\n조윤준 조윤준 오오오 오오오 오오오 LG의 조윤준 날려줘 하늘 끝까지", misc: "2018 시즌 종료 후 방출" },
       { title: "No.55 채은성", playerID: "79192", hasIntro: true, memory: 2022, lyrics: "채은성 힘차게 날아올라봐 LG의 승리 위하여 채은성 넌 빛나고 있어\n채은성 힘차게 날아올라봐 LG의 승리 위하여 채은성 주인공은 바로 너", misc: "2022년 11월 22일 FA로 한화 이적" },
       { title: "No.23 최경철", playerID: "73824", hasIntro: true, memory: 2024, lyrics: "오오 오오오 무적 LG 최경철 (최! 경! 철!) 오오 오오오 무적 LG 최경철 (최! 경! 철!)\n오오 오오오 무적 LG 최경철 (최! 경! 철!) 오오 오오오 무적 LG 최경철 (최! 경! 철!)", misc: "2016 시즌 종료 후 방출 후 삼성 이적" },
@@ -415,12 +414,12 @@ export const cheerSongs = {
       { title: "No.62 최승민", playerID: "65905", hasIntro: true, memory: 2025, lyrics: "오 달려라 오 달려라 날쌘돌이 최승민 오 달려라 오 달려라 날쌘돌이 최승민\n오 달려라 오 달려라 날쌘돌이 최승민 오 달려라 오 달려라 날쌘돌이 최승민", misc: "2025년 11월 25일 방출" },
       { title: "No.25 최승준", playerID: "76158", hasIntro: true, memory: 2024, lyrics: "LG 최승준 (LG 최승준) 그대는 LG의 홈런 타자 트윈스 최고의 해결사 LG 최승준\nLG 최승준 (LG 최승준) 그대는 LG의 홈런 타자 트윈스 최고의 해결사 LG LG LG 최승준", misc: "2015년 12월 6일 FA 정상호 보상선수로 SK 이적" },
       { title: "No.31 최재원", playerID: "63913", hasIntro: true, memory: 2020, lyrics: "LG 최재원 안타 (짝짝) LG 최재원 안타 (짝짝) 우리가 함께 해 (오~ 최! 재! 원!)\nLG 최재원 안타 (짝짝) LG 최재원 안타 (짝짝) 우리가 함께 해 (오~ 최! 재! 원!)", misc: "2020년 11월 7일 방출" },
-      { title: "No.65 카를로스 페게로", playerID: "69165", hasIntro: true, memory: 2019, lyrics: "카! 카! 카! 카를로스 페게로 워어어 안타 카를로스 페게로 무적 LG 파워 히터 페! 게! 로!\n카를로스 페게로 워어어 안타 카를로스 페게로 무적 LG 파워 히터 페! 게! 로!", misc: "2019 시즌 종료 후 방출" },
-      { title: "No.50 토미 조셉", playerID: "69150", hasIntro: true, memory: 2019, lyrics: "워어 LG의 토미 조셉 워 무적 LG 토미 조셉 워어 LG의 토미 조셉 워 무적 LG 토미 조셉\n워어 LG의 토미 조셉 워 무적 LG 토미 조셉 오 무적 LG 토미 조셉", misc: "2019 7월 10일 방출" },
-      { title: "No.57 페드로 발데스", playerID: "77157", hasIntro: true, memory: 2017, lyrics: "안! 타! 발데스 Go! 안! 타! 발데스 Go!", misc: "2007 시즌 종료 후 방출" },
+      { title: "No.65 카를로스 페게로", playerID: "69165", memory: 2019, lyrics: "카! 카! 카! 카를로스 페게로 워어어 안타 카를로스 페게로 무적 LG 파워 히터 페! 게! 로!\n카를로스 페게로 워어어 안타 카를로스 페게로 무적 LG 파워 히터 페! 게! 로!", misc: "2019 시즌 종료 후 방출" },
+      { title: "No.50 토미 조셉", playerID: "69150", memory: 2019, lyrics: "워어 LG의 토미 조셉 워 무적 LG 토미 조셉 워어 LG의 토미 조셉 워 무적 LG 토미 조셉\n워어 LG의 토미 조셉 워 무적 LG 토미 조셉 오 무적 LG 토미 조셉", misc: "2019년 7월 10일 방출" },
+      { title: "No.57 페드로 발데스", playerID: "77157", memory: 2017, lyrics: "안! 타! 발데스 Go! 안! 타! 발데스 Go!", misc: "2007 시즌 종료 후 방출" },
       { title: "No.30 허도환", playerID: "77243", hasIntro: true, memory: 2024, lyrics: "오오오오 LG의 허도환 오오오오 LG의 허도환 오오오오 LG의 허도환 무적 LG의 허도환 (안타!)\n오오오오 LG의 허도환 오오오오 LG의 허도환 오오오오 LG의 허도환 무적 LG의 허도환 (안타!)", misc: "2024 시즌 종료 후 은퇴" },
       { title: "No.94 현재윤", playerID: "72427", hasIntro: true, memory: 2017, lyrics: "LG 현재윤 LG 현재윤 LG 현재윤 워우워어\nLG 현재윤 LG 현재윤 LG 현재윤 워우워어", misc: "2014 시즌 종료 후 은퇴" },
-      { title: "No.5 홍현우", playerID: "90695", hasIntro: true, memory: 2017, lyrics: "날려라 날려라 날려라 홍현우 홍현우\n날려라 날려라 날려라 홍현우 홍현우", misc: "2004 시즌 후 트레이드로 KIA 이적" },
+      { title: "No.5 홍현우", playerID: "90695", memory: 2017, lyrics: "날려라 날려라 날려라 홍현우 홍현우\n날려라 날려라 날려라 홍현우 홍현우", misc: "2004 시즌 후 트레이드로 KIA 이적" },
       { title: "No.0 황목치승", playerID: "63077", hasIntro: true, memory: 2017, lyrics: "황목치승 LG의 승리 위하여 오오오오오오 무적 LG 황목치승 파이팅\n황목치승 LG의 승리 위하여 오오오오오오 무적 LG 황목치승 파이팅", misc: "2017년 10월 20일 은퇴" }
     ]
   },
