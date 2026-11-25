@@ -217,7 +217,13 @@ export const cheerSongs = {
       { title: "No.21 송은범", playerID: "73801", memory: 2016, lyrics: "KIA 송은범 타이거즈 송은범 긍정의 힘으로 워어어어 KIA 송은범 타이거즈 송은범 긍정의 힘으로 파이팅", misc: "2014년 12월 2일 FA로 한화 이적" },
       { title: "No.12 신범수", playerID: "66662", hasIntro: true, memory: 2023, lyrics: "열! 쩡! 신범수 오오오오오오 (안타!) 열! 쩡! 신범수 오오오오오오 (안타!)\n열! 쩡! 신범수 오오오오오오 (안타!) 열! 쩡! 신범수 오오오오오오 (안타!)", misc: "2023년 11월 22일 2차 드래프트로 SSG 이적" },
       { title: "No.2 신종길", playerID: "72559", hasIntro: true, memory: 2018, lyrics: "KIA의 신종길 KIA의 신종길 폭풍질주 KIA의 신종길 워어 KIA의 신종길 KIA의 신종길 폭풍질주 KIA의 신종길 워어", misc: "2018년 7월 8일 은퇴" },
-      { title: "No.8 안치홍", playerID: "79608", hasIntro: true, memory: 2019, lyrics: "KIA의 안치홍 안치홍 안타 치고 홈런 치고 KIA의 안치홍 안치홍 안타 치고 홈런 치고\nKIA의 안치홍 안치홍 안타 치고 홈런 치고 KIA의 안치홍 안치홍 안타 치고 홈런 치고", misc: "2020년 1월 6일 FA로 롯데 이적" },
+      {
+        title: "No.8 안치홍", playerID: "79608", hasIntro: true, memory: 2019,
+        cheers: [
+          { title: "응원가 1", fileName: "79608_1", lyrics: "KIA의 안치홍 안치홍 안타 치고 도루하고 KIA의 안치홍 안치홍 안타 치고 도루하고\nKIA의 안치홍 안치홍 안타 치고 도루하고 KIA의 안치홍 안치홍 안타 치고 도루하고" },
+          { title: "응원가 2", fileName: "79608_2", lyrics: "KIA의 안치홍 안치홍 안타 치고 홈런 치고 KIA의 안치홍 안치홍 안타 치고 홈런 치고\nKIA의 안치홍 안치홍 안타 치고 홈런 치고 KIA의 안치홍 안치홍 안타 치고 홈런 치고" },
+        ], misc: "2020년 1월 6일 FA로 롯데 이적"
+      },
       { title: "No.9 오준혁", playerID: "61743", hasIntro: true, memory: 2018, lyrics: "KIA의 오준혁 워어어 KIA의 오준혁 달려라 오준혁 워어어어어\nKIA의 오준혁 워어어 KIA의 오준혁 달려라 KIA 오준혁 오! 준! 혁!", misc: "2018년 6월 7일 트레이드로 kt 이적" },
       { title: "No.30 유민상", playerID: "62265", memory: 2021, lyrics: "오 오 오 오 타이거즈 유민상 빰빠밤빰빰빰 시원하게 날려라 빰빠밤빰빰빰 타이거즈 유민상 빰빠밤빰빰빰 유쾌하게 날려라 빰빠밤빰빰빰 Hey!", misc: "2021 시즌 종료 후 방출" },
       { title: "No.24 윤석민", playerID: "75620", memory: 2019, lyrics: "KIA의 언터쳐블 윤석민 KIA의 윤석민 윤석민 KIA의 언터쳐블 윤석민 윤석민 사랑해요", misc: "2019년 12월 13일 은퇴" },
